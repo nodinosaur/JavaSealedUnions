@@ -1,33 +1,39 @@
+# JavaSealedUnions
+
 ## ACKNOWLEDGEMENTS
 
 This library was heavily inspired by [RxEither](https://github.com/eleventigers/rxeither) and the wonderful [Domain Driven Design](fsharpforfunandprofit.com/ddd/) talk by [Scott Wlaschin](https://github.com/swlaschin).
 
 ## RATIONALE
+I recommend watching the talk linked above first to see what solutions this library provides.
 
-Java doesn't have tagged unions or sealed classes.
+Java's type system is considered not very powerful although it contains most OOP niceties. One of the most known absences are the so-called tagged unions or sealed classes, [available in languages like Kotlin](https://kotlinlang.org/docs/reference/classes.html#sealed-classes).
 
-Most common approach is doing IMyUnion and having a bunch of IAnotherGuyInTheUnion for public scopes, and AbstractMyUnion with GuyInteUntionImpl for private scopes. This makes it possible to break encapsulation and being able to implement the interface by a 3rd party outside the desired outcomes.
+Most current approach is having a base class or interface IMyContrat and implementing several of IChildContractImplementations for public scopes. Another alternative is having a public Abstract class that is inherited by a small set of package-only classes. The problem with the first approach is the possibility of breaking encapsulation and being able to implement the interface by a 3rd party outside the desired outcomes. The second approach hides the implementations for you, which requires the use of runtime tools like `instanceof` to handle. Both cases have one common problem: they only allow association of classes that are of the same type, or in the same hierarchy.
 
-The intent here is to create a class that can host one of several predefined complex types. For 1 or 2 types, generic wrappers are user instead:
+The intent of this library is to create a set of classses that can host one or several arbitrary complex types. Historically other libraries like Guava or RxJava have provided types to solve this issue:
 
-The base case is `Optional<T>`, which is the union of two types: `Some<T>` and `None`.
+* The base case is `Optional<T>`, which is the union of two types: `Some<T>` and `None`.
 
-The next case is `Either<A, B>` or `Result<T, Exception>`, which wraps the union of two arbitrary types `Left<L>` and `Right<R>`, or `Success<T>` and `Failure<Exception>`.
+* The next case is `Either<A, B>` or `Result<T, Exception>`, which wraps the union of two arbitrary types `Left<L>` and `Right<R>`, or `Success<T>` and `Failure<Exception>`.
 
-Generally languages stop at this amount of parameters, then change to explicit union types.
+For a higher number of parameters no abstraction is usually provided, and it's when other languages change to explicit union types. As Java doesn't have unions on the language, we have to continue abstracting away with 3 types (Left<L>, Middle<M> and Right<R>), 4 types, 5 types...etc. 
 
-Java doesn't have unions on the language, so we have to continue abstracting away with 3 types (Left<L>, Middle<M> and Right<R>), 4 types, 5 types...etc. I'm calling them `Union1<T>` for `Optional`, `Union2<L, R>` for `Either`, `Union3<L, M, R>`...up to `UnionN`, which for my library would be `Union9<A,B,C,D,E,F,G,H,I>`
+I'm calling them `Union1<T>` for `Optional`, `Union2<L, R>` for `Either`/`Result`, `Union3<L, M, R>`...up to `UnionN`, which for this library would be `Union9<A,B,C,D,E,F,G,H,I>`
 
 
 ## API
+Now that we understand what abstraction has to provide, we have to define a public API:
 
-Now we have the abstraction, on to the API:
+*What defines a union?*
 
-What defines a union? it's a container that allows storage of 2-N different types. It's container-agnostic, and it's implementation-agnostic. Interfaces it is then.
+It's a container that allows storage of 2-N different types. It's container and implementation-agnostic. To be properly composable it requires using interface composition rather than abstract inheritance.
 
-Basic interface: what does it need? it needs to be able to dereference the types to obtain its result. How is this done?
+*What belongs in the interface?*
 
-- Pattern matching: not in Java.
+It needs to be able to dereference the types to obtain a single, inequivocous, result. It should avoid extra operations, exceptions, and error states.
+
+How is this done in other languages?
 
 - Nested ifs:
 
@@ -43,11 +49,17 @@ if (union.isOne()) {
 
 - Polymorphism: every element in the union has the set of public methods so they never have to be dereferenced. Except when the types on the union are not of the same interface! The point of unions is joining types that may not relate to each other.
 
-- Continuations: you provide the union with one method per type on it that tells how the operation has to continue. It branches execution immediatelly without having to check types externally. The type checks happen internally as each implementation of the union knows only how to dereference itself, but it doesn't allow for representing incorrect states.
+- Pattern matching: not available in Java. But the intent of a pattern matcher is double: either continue to another piece of code, or return a single element. This ties directly to the next two options.
+
+- Continuations: provide the union with one method per type in it that tells how the dereferencing operation has to continue. It branches execution immediatelly without having to check types externally. The type checks happen internally as each implementation of the union knows only how to dereference itself. It doesn't allow representation incorrect states, dereferencing unavailable types, or null pointers.
 
 - Joining: provide a function per element in the union that maps them back into a single, common type, that the current execution flow knows how to use.
 
-For my library I have chosen continuations and joining as the default methods in the interface. Optionally you can also require `isXXX()` methods for checks, but never `getXXX()`.
+
+### Basic interface
+For my library I have chosen continuations and joining as the default methods in the interface. Optionally you can also require `isXXX()` methods for checks.
+
+**NOTE: you should never ever require or implement `getXXX()` as a way of returning a type inside the union. It defeats the purpose of the interface. Direct dereference is error-prone, tends to be abused by programmers, and has been cited as a mistake when creating `Optional`-like libraries.**
 
 
 ```
@@ -68,8 +80,7 @@ public interface Union2<Left, Right> {
 ```
 
 ### Creation
-
-Part of creating a union is that the union itself is a new type and has to be represented too. For this case I've included one Factory interface per UnionN that is required to create each one of the elements in the union:
+Part of creating a union is that the union itself is a new type and has to be represented too. For this case it's been included one Factory interface per UnionN that can be extended and required to create each one of the elements in the union:
 
 ```
 public interface Union2Factory<Left, Right> {
@@ -84,6 +95,7 @@ public interface Union2Factory<Left, Right> {
 ## USAGE
 
 ### Generic wrappers
+This set of classes are provided to wrap any class regardless of its type. They come in flavours from `Union1` to `Union9`.
 
 ```
 public class Either<L, R> implements Union2Factory<L, R> {
@@ -139,6 +151,10 @@ serverResponse.continue(getCommandExecutor::execute(), getUi()::showError());
 
 ### Typed wrappers
 
+In case you want your unions to be driven by your domain, there are two approaches:
+
+#### Factory class plus generic wrapper
+A parent class gives a more especific access to its methods.
 ```
 public class Salute {
 
@@ -180,10 +196,12 @@ String salute = getSalute().openDoor().join(dog -> "Who's a good dog?", neighbou
 getSalute().openDoor().continue(dogSaluter::salute(), neighbourSaluter::salute());
 ```
 
-### Typed wrappers and subtypes
+### Subtyping
+This ties up to the inheritance approach, except it's sealed and explicit. It can be done by both abstract classes or interfaces.
 
+**As a personal recomendation I would avoid any inherited methods, overloading, or overriding in any of the child classes. Watch the DDD talk in the Acknowledgements section to better understand the use of union types as plain data. The example below breaks this rule.**
 ```
-public class PaymentType implements Union3<CardPayment, PayPalPayment, BankTransferPayment> {
+public abstract class PaymentType implements Union3<CardPayment, PayPalPayment, BankTransferPayment> {
 
     public abstract boolean valid();
 
