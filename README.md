@@ -173,11 +173,11 @@ public class Salute {
     }
 
     public static Salute dog(String name, int paws) {
-        return FACTORY_INSTANCE.left<Dog, Neighbour>(new Dog(name, paws));
+        return new Salute(FACTORY_INSTANCE.left<Dog, Neighbour>(new Dog(name, paws)));
     }
 
     public static Salute neighbour(String name, String favouriteFood, boolean isLiked) {
-        return FACTORY_INSTANCE.right<Dog, Neighbour>(new Neighbour(name, favouriteFood, isLiked));
+        return new Salute(FACTORY_INSTANCE.right<Dog, Neighbour>(new Neighbour(name, favouriteFood, isLiked)));
     }
 
     private final Union2<Dog, Neighbour> either;
