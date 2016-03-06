@@ -5,7 +5,7 @@
 This library was heavily inspired by [RxEither](https://github.com/eleventigers/rxeither) and the wonderful [Domain Driven Design](http://fsharpforfunandprofit.com/ddd/) talk by [Scott Wlaschin](https://github.com/swlaschin).
 
 ## RATIONALE
-Java's type system is considered not very powerful although it contains most OOP niceties. Some of the most known absences are sealed classes and [tagged unions](https://en.wikipedia.org/wiki/Tagged_union), available in languages like [Kotlin](https://kotlinlang.org/docs/reference/classes.html#sealed-classes), [C#](https://msdn.microsoft.com/en-gb/library/88c54tsw.aspx) or [Rust](https://doc.rust-lang.org/book/enums.html) respectively.
+Java's type system is considered not very powerful although it contains most OOP niceties. Some of the most known absences are sealed classes and [tagged unions](https://en.wikipedia.org/wiki/Tagged_union). Sealed classes are available in languages like [Kotlin](https://kotlinlang.org/docs/reference/classes.html#sealed-classes), [C#](https://msdn.microsoft.com/en-gb/library/88c54tsw.aspx). Tagged unions are common on [Swift](https://developer.apple.com/library/ios/documentation/Swift/Conceptual/Swift_Programming_Language/Enumerations.html) and [Rust](https://doc.rust-lang.org/book/enums.html).
 
 JavaSealedUnions brings unions into idiomatic Java. It can also help representing sealed classes, but that is not the main focus.
 
