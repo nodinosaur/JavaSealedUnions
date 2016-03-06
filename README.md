@@ -51,15 +51,15 @@ if (union.isOne()) {
 
 - Pattern matching: not available in Java. But the intent of a pattern matcher is double: either continue to another piece of code, or return a single element. This ties directly to the next two options.
 
-- Continuations: provide the union with one method per type in it that tells how the dereferencing operation has to continue. It branches execution immediatelly without having to check types externally. The type checks happen internally as each implementation of the union knows only how to dereference itself. It doesn't allow representation incorrect states, dereferencing unavailable types, or null pointers.
+- Continuations: provide the union with one method per type in it that tells how the dereferencing operation has to continue. It branches execution synchronously into the continuations without having to check types externally. The type checks happen internally as each implementation of the union knows only how to dereference itself. It doesn't allow representating incorrect states, dereferencing unavailable types, or any other causes of Exceptions save for NPEs.
 
-- Joining: provide a function per element in the union that maps them back into a single, common type, that the current execution flow knows how to use.
+- Joining: provide a function per element in the union that maps them back into a single, common type, that the current execution flow knows how to use. The mapping is applied synchronously and the flow continues on the same method.
 
 
 ### Basic interface
 For my library I have chosen continuations and joining as the default methods in the interface. Optionally you can also require `isXXX()` methods for checks.
 
-**NOTE: you should never ever require or implement `getXXX()` as a way of returning a type inside the union. It defeats the purpose of the interface. Direct dereference is error-prone, tends to be abused by programmers, and has been cited as a mistake when creating `Optional`-like libraries.**
+**NOTE: you should never ever require or implement `getXXX()` as a way of returning a type inside the union. It defeats the purpose of the abstraction. Direct dereference is error-prone, tends to be abused by programmers, and has been cited as a mistake when creating `Optional`-like libraries.**
 
 
 ```
