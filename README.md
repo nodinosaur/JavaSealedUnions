@@ -152,12 +152,14 @@ A parent class gives a more explicit access to its methods.
 ```
 public class Salute {
 
+    private static final Either.Factory<Dog, Neighbour> FACTORY = GenericUnions.eitherFactory();
+
     public static Salute dog(String name, int paws) {
-        return new Salute(GenericUnions.<Dog, Neighbour>eitherFactory().left(new Dog(name, paws)));
+        return new Salute(FACTORY.left(new Dog(name, paws)));
     }
 
     public static Salute neighbour(String name, String favouriteFood, boolean isLiked) {
-        return new Salute(GenericUnions.<Dog, Neighbour>eitherFactory().right(new Neighbour(name, favouriteFood, isLiked)));
+        return new Salute(FACTORY.right(new Neighbour(name, favouriteFood, isLiked)));
     }
 
     private final Union2<Dog, Neighbour> either;

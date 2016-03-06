@@ -18,6 +18,8 @@ package com.pacoworks.sealedunions.generic;
 
 import org.junit.Test;
 
+import com.pacoworks.sealedunions.Union2;
+
 public class EitherTest {
     @Test
     public void testContinued() throws Exception {
@@ -35,5 +37,37 @@ public class EitherTest {
 
     @Test
     public void testFactory() throws Exception {
+    }
+
+    public static class Salute {
+        public static final Either.Factory<Dog, Neighbour> FACTORY = GenericUnions.eitherFactory();
+
+        private final Union2<Dog, Neighbour> either;
+
+        Salute(Union2<Dog, Neighbour> either) {
+            this.either = either;
+        }
+
+        public static Salute dog(String name, int paws) {
+            return new Salute(FACTORY.left(new Dog(name, paws)));
+        }
+
+        public static Salute neighbour(String name, String favouriteFood, boolean isLiked) {
+            return new Salute(FACTORY.right(new Neighbour(name, favouriteFood, isLiked)));
+        }
+
+        public Union2<Dog, Neighbour> openDoor() {
+            return either;
+        }
+
+        private static class Dog {
+            public Dog(String name, int paws) {
+            }
+        }
+
+        private static class Neighbour {
+            public Neighbour(String name, String favouriteFood, boolean isLiked) {
+            }
+        }
     }
 }
