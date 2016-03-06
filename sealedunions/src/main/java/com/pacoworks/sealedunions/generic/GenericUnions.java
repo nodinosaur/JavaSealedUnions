@@ -33,20 +33,6 @@ public final class GenericUnions {
         };
     }
 
-    public static <T, U> Either.Factory<T, U> eitherFactory() {
-        return new Either.Factory<T, U>() {
-            @Override
-            public Either<T, U> left(T t) {
-                return new Left<>(t);
-            }
-
-            @Override
-            public Either<T, U> right(U u) {
-                return new Right<>(u);
-            }
-        };
-    }
-
     public static <T> Try.Factory<T> tryFactory() {
         return new Try.Factory<T>() {
             @Override
@@ -57,6 +43,20 @@ public final class GenericUnions {
             @Override
             public Try<T> failure(Exception exception) {
                 return new Failure<>(exception);
+            }
+        };
+    }
+
+    public static <T, U> Either.Factory<T, U> eitherFactory() {
+        return new Either.Factory<T, U>() {
+            @Override
+            public Either<T, U> left(T t) {
+                return new Left<>(t);
+            }
+
+            @Override
+            public Either<T, U> right(U u) {
+                return new Right<>(u);
             }
         };
     }
