@@ -59,7 +59,7 @@ if (union.isOne()) {
 ### Basic interface
 For my library I have chosen continuations and joining as the default methods in the interface. Optionally you can also require `isXXX()` methods for checks.
 
-**NOTE: you should never ever require or implement `getXXX()` as a way of returning a type inside the union. It defeats the purpose of the abstraction. Direct dereference is error-prone, tends to be abused by programmers, and has been cited as a mistake when creating `Optional`-like libraries.**
+**NOTE: you should never ever require or implement `getXXX()` as a way of returning a type inside the union. It defeats the purpose of the library. Direct dereference is error-prone, tends to be abused by programmers, and has been cited as a mistake when creating `Optional`-like libraries.**
 
 
 ```
