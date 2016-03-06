@@ -80,6 +80,16 @@ public interface Union2<Left, Right> {
 }
 ```
 
+And one example usage:
+
+```
+Union2<User, Team> information = serverRequester.loggedAccountInformation();
+// Get a single piece of information from either
+int purchases = getSalute().openDoor().join(user -> user.getPurchases(), team -> team.getAccountManager().getPurchases());
+// Or you can finish the current method and continue somewhere else depending on the type
+information.continue(UserPageTemplater::start(), TeamPageTemplater::start());
+```
+
 ### Creation
 Part of creating a union is that the union itself is a new type and has to be represented too. For this case it's been included one Factory interface per UnionN that can be extended and required to create each one of the elements in the union:
 
