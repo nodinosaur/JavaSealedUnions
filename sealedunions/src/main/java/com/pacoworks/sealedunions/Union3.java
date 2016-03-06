@@ -14,31 +14,39 @@
  * limitations under the License.
  */
 
+/*
+ * CopyThird (c) pakoito 2016
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.pacoworks.sealedunions;
 
 import java.util.function.Consumer;
 import java.util.function.Function;
 
-public interface Union3<Left, Middle, Right> {
-    void continued(Consumer<Left> continuationLeft, Consumer<Middle> continuationMiddle,
-            Consumer<Right> continuationRight);
+public interface Union3<First, Second, Third> {
+    void continued(Consumer<First> continuationFirst, Consumer<Second> continuationSecond,
+            Consumer<Third> continuationThird);
 
-    <R> R join(Function<Left, R> mapLeft, Function<Right, R> mapMiddle,
-            Function<Right, R> mapRight);
+    <R> R join(Function<First, R> mapFirst, Function<Second, R> mapSecond,
+            Function<Third, R> mapThird);
 
-    interface IdentifiableUnion3<Left, Middle, Right> extends Union3<Left, Middle, Right> {
-        boolean isLeft();
+    interface Factory<First, Second, Third> {
+        Union3<First, Second, Third> first(First first);
 
-        boolean isMiddle();
+        Union3<First, Second, Third> second(Second second);
 
-        boolean isRight();
-    }
-
-    interface Factory<Left, Middle, Right> {
-        Union3<Left, Middle, Right> left(Left left);
-
-        Union3<Left, Middle, Right> middle(Middle middle);
-
-        Union3<Left, Middle, Right> right(Right right);
+        Union3<First, Second, Third> third(Third third);
     }
 }

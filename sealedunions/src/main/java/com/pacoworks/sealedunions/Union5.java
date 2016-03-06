@@ -28,18 +28,6 @@ public interface Union5<First, Second, Third, Fourth, Fifth> {
             Function<Third, R> mapThird, Function<Fourth, R> mapFourth,
             Function<Fifth, R> mapFifth);
 
-    interface IdentifiableUnion9<First, Second, Third, Fourth, Fifth>
-            extends Union5<First, Second, Third, Fourth, Fifth> {
-        boolean isFirst();
-
-        boolean isSecond();
-
-        boolean isThird();
-
-        boolean isFourth();
-
-        boolean isFifth();
-    }
 
     interface Factory<First, Second, Third, Fourth, Fifth> {
         Union5<First, Second, Third, Fourth, Fifth> first(First first);

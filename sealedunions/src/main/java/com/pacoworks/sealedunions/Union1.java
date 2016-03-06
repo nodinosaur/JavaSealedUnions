@@ -20,18 +20,14 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
-public interface Union1<Single> {
-    void continued(Consumer<Single> continuationPresent, Runnable continuationAbsent);
+public interface Union1<First> {
+    void continued(Consumer<First> continuationFirst, Runnable continuationNone);
 
-    <R> R join(Function<Single, R> mapPresent, Supplier<R> mapAbsent);
+    <R> R join(Function<First, R> mapFirst, Supplier<R> mapNone);
 
-    interface IdentifiableUnion1<Single> extends Union1<Single> {
-        boolean isPresent();
-    }
+    interface Factory<First> {
+        Union1<First> first(First single);
 
-    interface Factory<Single> {
-        Union1<Single> present(Single single);
-
-        Union1<Single> absent();
+        Union1<First> none();
     }
 }

@@ -26,18 +26,6 @@ public interface Union4<First, Second, Third, Fourth> {
     <R> R join(Function<First, R> mapFirst, Function<Third, R> mapSecond,
             Function<Third, R> mapThird, Function<Fourth, R> mapFourth);
 
-    interface IdentifiableUnion9<First, Second, Third, Fourth>
-            extends Union4<First, Second, Third, Fourth> {
-        boolean isFirst();
-
-        boolean isSecond();
-
-        boolean isThird();
-
-        boolean isFourth();
-
-        boolean isFifth();
-    }
 
     interface Factory<First, Second, Third, Fourth> {
         Union4<First, Second, Third, Fourth> first(First first);

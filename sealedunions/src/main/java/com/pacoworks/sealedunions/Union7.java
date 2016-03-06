@@ -29,22 +29,6 @@ public interface Union7<First, Second, Third, Fourth, Fifth, Sixth, Seventh> {
             Function<Third, R> mapThird, Function<Fourth, R> mapFourth, Function<Fifth, R> mapFifth,
             Function<Sixth, R> mapSixth, Function<Seventh, R> mapSeventh);
 
-    interface IdentifiableUnion9<First, Second, Third, Fourth, Fifth, Sixth, Seventh>
-            extends Union7<First, Second, Third, Fourth, Fifth, Sixth, Seventh> {
-        boolean isFirst();
-
-        boolean isSecond();
-
-        boolean isThird();
-
-        boolean isFourth();
-
-        boolean isFifth();
-
-        boolean isSixth();
-
-        boolean isSeventh();
-    }
 
     interface Factory<First, Second, Third, Fourth, Fifth, Sixth, Seventh> {
         Union7<First, Second, Third, Fourth, Fifth, Sixth, Seventh> first(First first);

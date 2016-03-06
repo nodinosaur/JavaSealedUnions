@@ -30,24 +30,6 @@ public interface Union8<First, Second, Third, Fourth, Fifth, Sixth, Seventh, Eig
             Function<Sixth, R> mapSixth, Function<Seventh, R> mapSeventh,
             Function<Eighth, R> mapEighth);
 
-    interface IdentifiableUnion9<First, Second, Third, Fourth, Fifth, Sixth, Seventh, Eighth>
-            extends Union8<First, Second, Third, Fourth, Fifth, Sixth, Seventh, Eighth> {
-        boolean isFirst();
-
-        boolean isSecond();
-
-        boolean isThird();
-
-        boolean isFourth();
-
-        boolean isFifth();
-
-        boolean isSixth();
-
-        boolean isSeventh();
-
-        boolean isEighth();
-    }
 
     interface Factory<First, Second, Third, Fourth, Fifth, Sixth, Seventh, Eighth> {
         Union8<First, Second, Third, Fourth, Fifth, Sixth, Seventh, Eighth> first(First first);

@@ -31,26 +31,6 @@ public interface Union9<First, Second, Third, Fourth, Fifth, Sixth, Seventh, Eig
             Function<Sixth, R> mapSixth, Function<Seventh, R> mapSeventh,
             Function<Eighth, R> mapEighth, Function<Ninth, R> mapNinth);
 
-    interface IdentifiableUnion9<First, Second, Third, Fourth, Fifth, Sixth, Seventh, Eighth, Ninth>
-            extends Union9<First, Second, Third, Fourth, Fifth, Sixth, Seventh, Eighth, Ninth> {
-        boolean isFirst();
-
-        boolean isSecond();
-
-        boolean isThird();
-
-        boolean isFourth();
-
-        boolean isFifth();
-
-        boolean isSixth();
-
-        boolean isSeventh();
-
-        boolean isEighth();
-
-        boolean isNinth();
-    }
 
     interface Factory<First, Second, Third, Fourth, Fifth, Sixth, Seventh, Eighth, Ninth> {
         Union9<First, Second, Third, Fourth, Fifth, Sixth, Seventh, Eighth, Ninth> first(
