@@ -16,6 +16,8 @@
 
 package com.pacoworks.sealedunions.generic;
 
+import java.util.function.Function;
+
 import org.junit.Test;
 
 import com.pacoworks.sealedunions.Union2;
@@ -56,9 +58,11 @@ public class EitherTest {
             return new Salute(FACTORY.right(new Neighbour(name, favouriteFood, isLiked)));
         }
 
-        public Union2<Dog, Neighbour> openDoor() {
-            return either;
+        public String getSalute(Function<Dog, String> mapDog,
+                Function<Neighbour, String> mapNeighbour) {
+            return either.join(mapDog, mapNeighbour);
         }
+
 
         private static class Dog {
             public Dog(String name, int paws) {

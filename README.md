@@ -141,7 +141,7 @@ In case you want your unions to be driven by your domain, you have to create you
 #### Holder class with generic union
 A domain class giving a more explicit naming and access to its methods and content.
 
-**REMINDER: you should never ever require or implement `getXXX()` as a way of returning a type inside the union.**
+**REMINDER: Implement `getXXX()` as a way of returning a type inside the union defeats the purpose of unions.**
 
 ```
 public class Salute {
