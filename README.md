@@ -5,11 +5,11 @@
 This library was heavily inspired by [RxEither](https://github.com/eleventigers/rxeither) and the wonderful [Domain Driven Design](http://fsharpforfunandprofit.com/ddd/) talk by [Scott Wlaschin](https://github.com/swlaschin).
 
 ## RATIONALE
+JavaSealedUnions brings unions into idiomatic Java to allow for better domain modelling. It can also help representing sealed classes, but that is not the main focus.
+
 Java's type system is considered not very powerful although it contains most OOP niceties. Some of the most known absences are sealed classes and [tagged unions](https://en.wikipedia.org/wiki/Tagged_union). Sealed classes are available in languages like [Kotlin](https://kotlinlang.org/docs/reference/classes.html#sealed-classes), or [C#](https://msdn.microsoft.com/en-gb/library/88c54tsw.aspx). Tagged unions are common on [Swift](https://developer.apple.com/library/ios/documentation/Swift/Conceptual/Swift_Programming_Language/Enumerations.html) and [Rust](https://doc.rust-lang.org/book/enums.html).
 
-JavaSealedUnions brings unions into idiomatic Java. It can also help representing sealed classes, but that is not the main focus.
-
-Most current approach is having a base class or interface `IMyContract` and implementing several of `IChildContractPlusExtras` for public scopes. Another alternative is having a public `abstract` class that is inherited by a small set of package-only classes. The problem with the first approach is the possibility of breaking encapsulation and being able to implement the interface by a 3rd party outside the desired outcomes. The second approach hides the implementations for you, which requires the use of runtime tools like `instanceof` to handle. Both cases have one common problem: they only allow association of classes that are of the same type, or in the same hierarchy.
+The most frequent approach to solve this modelling problem is having a base class or interface `IMyContract` and implementing several of `IChildContractPlusExtras` for public scopes. Another alternative is having a public `abstract` class that is inherited by a small set of package-only classes. The problem with the first approach is the possibility of breaking encapsulation and being able to implement the interface by a 3rd party outside the desired outcomes. The second approach hides the implementations for you, which requires the use of runtime tools like `instanceof` to handle. Both cases have one common problem: they only allow association of classes that are of the same type, or in the same hierarchy.
 
 The intent of this library is to create a set of classses that can host one or several arbitrary complex types. Historically other libraries like Guava or RxJava have provided types to solve this issue:
 
