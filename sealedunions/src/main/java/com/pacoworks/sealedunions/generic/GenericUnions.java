@@ -278,7 +278,7 @@ public final class GenericUnions {
         };
     }
 
-    public static <A, B, C, D, E, F, G, H, I> Union9.Factory<A, B, C, D, E, F, G, H, I> ninetetFactory() {
+    public static <A, B, C, D, E, F, G, H, I> Union9.Factory<A, B, C, D, E, F, G, H, I> nonetFactory() {
         return new Union9.Factory<A, B, C, D, E, F, G, H, I>() {
             @Override
             public Union9<A, B, C, D, E, F, G, H, I> first(A a) {
