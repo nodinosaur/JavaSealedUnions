@@ -122,62 +122,29 @@ public interface Factory<Left, Right> {
 ## USAGE
 
 ### Generic wrappers
-This set of classes are provided by the library to wrap any class regardless of its type. They come in flavours from `Union1` to `Union9`.
+This set of classes are provided by the library to wrap any class regardless of its type. They come in flavours from `Union1` to `Union9`, or the specialized types `Result<T>`, `Try<T>` and `Either<T, U>`.
+
+#### Generic unions
+`GenericUnions` is a class with factories for all the union types. Factory names are `resultFactory()`, `eitherFactory()`, `tryFactory()`, `singletFactory()`, `dupletFactory()`, `tripletFactory()`, `quartetFactory()`, `quintetFactory()`, `sextetFactory()`, `septetFactory()`, `octetFactory()` and `ninetetFactory()`.
+```
 
 ```
-public class Either<L, R> implements Union2.Factory<L, R> {
 
-        public <L, R> Union2<L, R> left(L value) {
-            return new Left<>(value);
-        }
+#### Result
+Result is a specialization of Union1<T> that takes a result, or an absence of one. A factory is available at `GenericUtils.resultFactory()`.
+```
+```
 
-        public <L, R> Union2<L, R> right(R value) {
-            return new Right<>(value);
-        }
-}
-
-public class Left<L, R> implements Union2<L, R> {
-
-    final L value;
-
-    public Left(L value){
-        this.value = value;
-    }
-
-    public void continued(Action1<L> continuationLeft, Action1<R> continuationRight) {
-        continuationLeft.call(value);
-    }
-
-    public <T> T join(Func1<L, T> mapLeft, Func1<R, T> mapRight) {
-        return mapLeft.call(value);
-    }
-}
-
-public class Right<L, R> implements Union2<L, R> {
-
-    final R value;
-
-    public Right(R value){
-        this.value = value;
-    }
-
-    public void continued(Action1<L> continuationLeft, Action1<R> continuationRight) {
-        continuationRight.call(value);
-    }
-
-    public <T> T join(Func1<L, T> mapLeft, Func1<R, T> mapRight) {
-        return mapRight.call(value);
-    }
-}
-
-// Example
-
-Union2<Command, Exception> serverResponse = getResponse();
-serverResponse.continued(getCommandExecutor()::execute(), getUi()::showError());
+#### Try
+Try is a specialization of Union2<T, Exception> that takes a value or an error. A factory is available at `GenericUtils.tryFactory()`.
+```
+```
+#### Either
+Either is a specialization of Union2<T, U> that takes a left and right value. A factory is available at `GenericUtils.eitherFactory()`.
+```
 ```
 
 ### Typed wrappers
-
 In case you want your unions to be driven by your domain, there are two approaches:
 
 #### Factory class plus generic wrapper
