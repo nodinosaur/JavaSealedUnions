@@ -21,7 +21,7 @@ import java.util.function.Function;
 
 import com.pacoworks.sealedunions.Union4;
 
-public class Union4First<A, B, C, D> implements Union4<A, B, C, D> {
+final class Union4First<A, B, C, D> implements Union4<A, B, C, D> {
     private final A value;
 
     public Union4First(A value) {
@@ -35,7 +35,7 @@ public class Union4First<A, B, C, D> implements Union4<A, B, C, D> {
     }
 
     @Override
-    public <R> R join(Function<A, R> mapFirst, Function<C, R> mapSecond, Function<C, R> mapThird,
+    public <R> R join(Function<A, R> mapFirst, Function<B, R> mapSecond, Function<C, R> mapThird,
             Function<D, R> mapFourth) {
         return mapFirst.apply(value);
     }

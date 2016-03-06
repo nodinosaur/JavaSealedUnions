@@ -21,7 +21,7 @@ import java.util.function.Function;
 
 import com.pacoworks.sealedunions.Union3;
 
-public class Union3Third<T, U, V> implements Union3<T, U, V> {
+final class Union3Third<T, U, V> implements Union3<T, U, V> {
     private final V value;
 
     public Union3Third(V value) {

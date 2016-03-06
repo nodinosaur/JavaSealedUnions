@@ -21,7 +21,7 @@ import java.util.function.Function;
 
 import com.pacoworks.sealedunions.Union4;
 
-public class Union4Fourth<A, B, C, D> implements Union4<A, B, C, D> {
+final class Union4Fourth<A, B, C, D> implements Union4<A, B, C, D> {
     private final D value;
 
     public Union4Fourth(D value) {

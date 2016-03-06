@@ -19,7 +19,7 @@ package com.pacoworks.sealedunions.generic;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
-public class Left<T, U> implements Either<T, U> {
+final class Left<T, U> implements Either<T, U> {
     private final T value;
 
     public Left(T left) {

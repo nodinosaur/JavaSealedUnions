@@ -20,7 +20,7 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
-public class Absent<T> implements Result<T> {
+final class Absent<T> implements Result<T> {
     @Override
     public void continued(Consumer<T> continuationFirst, Runnable continuationNone) {
         continuationNone.run();
