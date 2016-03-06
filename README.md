@@ -69,7 +69,7 @@ public interface Union2<Left, Right> {
 
     <R> R join(Func1<Left, R> mapLeft, Func1<Right, R> mapRight);
 
-    public interface IdentifiableUnion2<Left, Right> extends Union2<Left, Right> {
+    public interface Identifiable<Left, Right> extends Union2<Left, Right> {
 
         boolean isLeft();
 
@@ -83,7 +83,7 @@ public interface Union2<Left, Right> {
 Part of creating a union is that the union itself is a new type and has to be represented too. For this case it's been included one Factory interface per UnionN that can be extended and required to create each one of the elements in the union:
 
 ```
-public interface Union2Factory<Left, Right> {
+public interface Factory<Left, Right> {
 
     Union2<Left, Right> left(Left left);
 
@@ -98,7 +98,7 @@ public interface Union2Factory<Left, Right> {
 This set of classes are provided to wrap any class regardless of its type. They come in flavours from `Union1` to `Union9`.
 
 ```
-public class Either<L, R> implements Union2Factory<L, R> {
+public class Either<L, R> implements Union2.Factory<L, R> {
 
         public <L, R> Either<L, R> left(L value) {
             return new Left<>(value);
@@ -160,7 +160,7 @@ public class Salute {
 
     private static final Factory FACTORY_INSTANCE = new Factory();
 
-    private static class Factory implements Union2Factory<Dog, Neighbour> {
+    private static class Factory implements Union2.Factory<Dog, Neighbour> {
 
         public Salute left(Dog dog) {
             return new Left<Dog, Neighbour>(dog);
@@ -207,7 +207,7 @@ public abstract class PaymentType implements Union3<CardPayment, PayPalPayment, 
 
     private static final Factory FACTORY_INSTANCE = new Factory();
 
-    private static class Factory implements Union3Factory<CardPayment, PayPalPayment, BankTransferPayment> {
+    private static class Factory implements Union3.Factory<CardPayment, PayPalPayment, BankTransferPayment> {
 
         public CardPayment left(String cardNo, String ccv) {
             return new CardPayment(cardNo, ccv);
