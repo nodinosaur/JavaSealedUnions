@@ -232,7 +232,7 @@ public abstract class PaymentType implements Union3<CardPayment, PayPalPayment, 
     }
 
     public static PaymentType bankTransfer(String accNo) {
-        return FACTORY_INSTANCE.right<Dog, Cat>(new Cat(name, favouriteFood, isAdorable));
+        return FACTORY_INSTANCE.right(accNo);
     }
 }
 
