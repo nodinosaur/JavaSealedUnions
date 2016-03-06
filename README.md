@@ -144,7 +144,7 @@ Either is a specialization of Union2<T, U> that takes a left and right value. A 
 ```
 
 ### Typed wrappers
-In case you want your unions to be driven by your domain, there are two approaches:
+In case you want your unions to be driven by your domain, you have to create your own classes implementing the base interfaces. There are two recommended approaches:
 
 #### Factory class plus generic wrapper
 A parent class gives a more explicit access to its methods.
@@ -155,11 +155,11 @@ public class Salute {
 
     private static class Factory implements Union2.Factory<Dog, Neighbour> {
 
-        public Salute left(Dog dog) {
+        public Union2<Dog, Neighbour> left(Dog dog) {
             return new Left<Dog, Neighbour>(dog);
         }
 
-        public Salute right(Neighbour neighbour) {
+        public Union2<Dog, Neighbour> right(Neighbour neighbour) {
             return new Right<Dog, Neighbour>(neighbour);
         }
     }
@@ -192,7 +192,7 @@ getSalute().openDoor().continued(dogSaluter::salute(), neighbourSaluter::salute(
 #### Subtyping
 This ties up to the inheritance approach, except it's sealed and explicit. It can be done by both abstract classes or interfaces.
 
-**As a personal recomendation I would avoid any inherited methods, overloading, or overriding in any of the child classes. Watch the DDD talk in the Acknowledgements section to better understand the use of union types as plain data. The example below breaks this rule by adding a new method `valid()`.**
+**As a personal recommendation I would avoid any inherited methods, overloading, or overriding in any of the child classes. Watch the DDD talk in the Acknowledgements section to better understand the use of union types as plain data. The example below breaks this rule by adding a new method `valid()`.**
 ```
 public abstract class PaymentType implements Union3<CardPayment, PayPalPayment, BankTransferPayment> {
 
