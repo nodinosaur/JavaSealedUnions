@@ -34,7 +34,7 @@ It's a container that allows storage of a single element that can be from any of
 
 It needs to be able to dereference the types to obtain a single, inequivocous, result. It should avoid extra operations, not throw exceptions, and not be able to represent error states.
 
-How is this done in other languages?
+*How is this done in other languages?*
 
 - Nested ifs:
 
