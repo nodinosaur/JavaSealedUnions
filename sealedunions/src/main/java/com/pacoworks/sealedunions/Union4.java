@@ -23,7 +23,7 @@ public interface Union4<First, Second, Third, Fourth> {
     void continued(Consumer<First> continuationFirst, Consumer<Second> continuationSecond,
             Consumer<Third> continuationThird, Consumer<Fourth> continuationFourth);
 
-    <R> R join(Function<First, R> mapFirst, Function<Third, R> mapSecond,
+    <R> R join(Function<First, R> mapFirst, Function<Second, R> mapSecond,
             Function<Third, R> mapThird, Function<Fourth, R> mapFourth);
 
 
