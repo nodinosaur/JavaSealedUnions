@@ -14,12 +14,25 @@
  * limitations under the License.
  */
 
-package com.pacoworks.sealedunions;
+package com.pacoworks.sealedunions.generic;
 
-import org.junit.Test;
+import java.util.function.Consumer;
+import java.util.function.Function;
 
-public class Union2Test {
-    @Test
-    public void test() throws Exception {
+public final class Failure<T> implements Try<T> {
+    private final Exception exception;
+
+    public Failure(Exception exception) {
+        this.exception = exception;
+    }
+
+    @Override
+    public void continued(Consumer<T> continuationFirst, Consumer<Exception> continuationSecond) {
+        continuationSecond.accept(exception);
+    }
+
+    @Override
+    public <R> R join(Function<T, R> mapFirst, Function<Exception, R> mapSecond) {
+        return mapSecond.apply(exception);
     }
 }
