@@ -1,4 +1,3 @@
-
 /*
  * Copyright (c) pakoito 2016
  *
@@ -20,20 +19,25 @@ package com.pacoworks.sealedunions;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
-public interface Union2<Left, Right> {
-    void continued(Consumer<Left> continuationLeft, Consumer<Right> continuationRight);
+public interface Union3<Left, Middle, Right> {
+    void continued(Consumer<Left> continuationLeft, Consumer<Middle> continuationMiddle,
+            Consumer<Right> continuationRight);
 
-    <R> R map(Function<Left, R> mapLeft, Function<Right, R> mapRight);
+    <R> R map(Function<Left, R> mapLeft, Function<Right, R> mapMiddle, Function<Right, R> mapRight);
 
-    interface Identifiable<Left, Right> extends Union2<Left, Right> {
+    interface IdentifiableUnion3<Left, Middle, Right> extends Union3<Left, Middle, Right> {
         boolean isLeft();
+
+        boolean isMiddle();
 
         boolean isRight();
     }
 
-    interface Factory<Left, Right> {
-        Union2<Left, Right> left(Left left);
+    interface Factory<Left, Middle, Right> {
+        Union3<Left, Middle, Right> left(Left left);
 
-        Union2<Left, Right> right(Right right);
+        Union3<Left, Middle, Right> middle(Middle middle);
+
+        Union3<Left, Middle, Right> right(Right right);
     }
 }
