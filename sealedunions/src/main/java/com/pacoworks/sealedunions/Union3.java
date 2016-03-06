@@ -23,7 +23,8 @@ public interface Union3<Left, Middle, Right> {
     void continued(Consumer<Left> continuationLeft, Consumer<Middle> continuationMiddle,
             Consumer<Right> continuationRight);
 
-    <R> R map(Function<Left, R> mapLeft, Function<Right, R> mapMiddle, Function<Right, R> mapRight);
+    <R> R join(Function<Left, R> mapLeft, Function<Right, R> mapMiddle,
+            Function<Right, R> mapRight);
 
     interface IdentifiableUnion3<Left, Middle, Right> extends Union3<Left, Middle, Right> {
         boolean isLeft();

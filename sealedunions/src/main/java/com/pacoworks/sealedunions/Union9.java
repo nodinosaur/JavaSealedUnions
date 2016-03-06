@@ -26,7 +26,7 @@ public interface Union9<First, Second, Third, Fourth, Fifth, Sixth, Seventh, Eig
             Consumer<Seventh> continuationSeventh, Consumer<Eighth> continuationEighth,
             Consumer<Ninth> continuationNinth);
 
-    <R> R map(Function<First, R> mapFirst, Function<Third, R> mapSecond,
+    <R> R join(Function<First, R> mapFirst, Function<Third, R> mapSecond,
             Function<Third, R> mapThird, Function<Fourth, R> mapFourth, Function<Fifth, R> mapFifth,
             Function<Sixth, R> mapSixth, Function<Seventh, R> mapSeventh,
             Function<Eighth, R> mapEighth, Function<Ninth, R> mapNinth);

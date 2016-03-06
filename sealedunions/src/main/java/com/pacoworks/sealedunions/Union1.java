@@ -23,7 +23,7 @@ import java.util.function.Supplier;
 public interface Union1<Single> {
     void continued(Consumer<Single> continuationPresent, Runnable continuationAbsent);
 
-    <R> R map(Function<Single, R> mapPresent, Supplier<R> mapAbsent);
+    <R> R join(Function<Single, R> mapPresent, Supplier<R> mapAbsent);
 
     interface IdentifiableUnion1<Single> extends Union1<Single> {
         boolean isPresent();

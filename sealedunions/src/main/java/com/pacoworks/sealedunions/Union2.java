@@ -23,7 +23,7 @@ import java.util.function.Function;
 public interface Union2<Left, Right> {
     void continued(Consumer<Left> continuationLeft, Consumer<Right> continuationRight);
 
-    <R> R map(Function<Left, R> mapLeft, Function<Right, R> mapRight);
+    <R> R join(Function<Left, R> mapLeft, Function<Right, R> mapRight);
 
     interface Identifiable<Left, Right> extends Union2<Left, Right> {
         boolean isLeft();
