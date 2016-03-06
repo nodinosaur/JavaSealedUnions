@@ -39,16 +39,30 @@ It needs to be able to dereference the types to obtain a single, inequivocous, r
 - Nested ifs:
 
 ```
-if (union.isOne()) { 
-    One element = union.getOne(); /* do something with one*/ 
-} else if (union.isTwo()) { 
-    Two element = union.getTwo(); /* do something with two*/ 
+if (union.isOne()) {
+    One element = union.getOne();
+    /* do something with one*/ 
+} else if (union.isTwo()) {
+    Two element = union.getTwo();
+    /* do something with two*/ 
 } else...
 ```
 
  ... and so and so until 9. Problem? The api can be dereferenced using `getXXX()` without calling any of the `isXXX()` methods, leading to exceptions and unexpected states. It adds one unneeded extra operation.
 
-- Polymorphism: every element in the union has the set of public methods so they never have to be dereferenced. Except when the types on the union are not of the same interface! The point of unions is joining types that may not relate to each other.
+- Polymorphism:
+
+```
+MyElement element = createElement();
+if (element instanceof One) {
+    One one = (One)element;
+    /* do something with one*/
+} else if (element instanceof Two) {
+    Two two = (Two)element;
+    /* do something with two*/
+} else...
+```
+It suffers from the same carences as nested ifs: it requires programmer discipline to remember and check before casting, plus it leans to the same errors. The only change is that it now requires two operations: `instanceof` and a cast.
 
 - Pattern matching: not available in Java. But the intent of a pattern matcher is double: either continue to another piece of code, or return a single element. This ties directly to the next two options.
 
