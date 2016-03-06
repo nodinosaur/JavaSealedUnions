@@ -194,11 +194,11 @@ public class Salute {
 
     private final Union2<Dog, Neighbour> either;
 
-    Salute(Union2<Dog, Neighbour> either){
+    Salute(Union2<Dog, Neighbour> either) {
         this.either = either;
     }
 
-    public Union2<Dog, Neighbour> openDoor(){
+    public Union2<Dog, Neighbour> openDoor() {
         return either;
     }
 }
@@ -254,7 +254,7 @@ class CardPayment extends PaymentType {
 
     private final String ccv;
 
-    CardPayment(String cardNo, String ccv){
+    CardPayment(String cardNo, String ccv) {
         this.cardNo = cardNo;
         this.ccv = ccv;
     }
@@ -278,7 +278,7 @@ class PayPalPayment extends PaymentType {
 
     private final String pwd;
 
-    CardPayment(String user, String pwd){
+    CardPayment(String user, String pwd) {
         this.user = user;
         this.pwd = pwd;
     }
