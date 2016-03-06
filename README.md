@@ -152,25 +152,12 @@ A parent class gives a more explicit access to its methods.
 ```
 public class Salute {
 
-    private static final Factory FACTORY_INSTANCE = new Factory();
-
-    private static class Factory implements Union2.Factory<Dog, Neighbour> {
-
-        public Union2<Dog, Neighbour> left(Dog dog) {
-            return new Left<Dog, Neighbour>(dog);
-        }
-
-        public Union2<Dog, Neighbour> right(Neighbour neighbour) {
-            return new Right<Dog, Neighbour>(neighbour);
-        }
-    }
-
     public static Salute dog(String name, int paws) {
-        return new Salute(FACTORY_INSTANCE.left(new Dog(name, paws)));
+        return new Salute(GenericUnions.eitherFactory().left(new Dog(name, paws)));
     }
 
     public static Salute neighbour(String name, String favouriteFood, boolean isLiked) {
-        return new Salute(FACTORY_INSTANCE.right(new Neighbour(name, favouriteFood, isLiked)));
+        return new Salute(GenericUnions.eitherFactory().right(new Neighbour(name, favouriteFood, isLiked)));
     }
 
     private final Union2<Dog, Neighbour> either;
