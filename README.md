@@ -163,7 +163,7 @@ public class Salute {
     }
 
     public void openDoor(Consumer<Dog> continueDog, Consumer<Neighbour> continueNeighbour) {
-        return either.continued(continueDog, consumeNeighbour);
+        return either.continued(continueDog, continueNeighbour);
     }
 
     public String rememberSalute(Function<Dog, String> mapDog, Function<Neighbour, String> mapNeighbour) {
