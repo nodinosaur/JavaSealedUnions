@@ -80,7 +80,7 @@ For my library I have chosen continuations and joining as the default methods in
 ```
 public interface Union2<Left, Right> {
 
-    continue(Action1<Left> continuationLeft, Action1<Right> continuationRight);
+    continued(Action1<Left> continuationLeft, Action1<Right> continuationRight);
 
     <R> R join(Func1<Left, R> mapLeft, Func1<Right, R> mapRight);
 
@@ -103,7 +103,7 @@ Union2<User, Team> information = serverRequester.loggedAccountInformation();
 List<Purchase> totalPurchases = information.join(user -> user.getPurchases(), team -> team.getAccountManager().getPurchases());
 
 // Or you can finish the current method and continue somewhere else depending on the type
-information.continue(UserPageTemplater::start(), TeamPageTemplater::start());
+information.continued(UserPageTemplater::start(), TeamPageTemplater::start());
 ```
 
 ### Creation
@@ -144,7 +144,7 @@ public class Left<L, R> implements Union2<L, R> {
         this.value = value;
     }
 
-    public void continue(Action1<L> continuationLeft, Action1<R> continuationRight) {
+    public void continued(Action1<L> continuationLeft, Action1<R> continuationRight) {
         continuationLeft.call(value);
     }
 
@@ -161,7 +161,7 @@ public class Right<L, R> implements Union2<L, R> {
         this.value = value;
     }
 
-    public void continue(Action1<L> continuationLeft, Action1<R> continuationRight) {
+    public void continued(Action1<L> continuationLeft, Action1<R> continuationRight) {
         continuationRight.call(value);
     }
 
@@ -173,7 +173,7 @@ public class Right<L, R> implements Union2<L, R> {
 // Example
 
 Union2<Command, Exception> serverResponse = getResponse();
-serverResponse.continue(getCommandExecutor()::execute(), getUi()::showError());
+serverResponse.continued(getCommandExecutor()::execute(), getUi()::showError());
 ```
 
 ### Typed wrappers
@@ -220,7 +220,7 @@ public class Salute {
 
 // Example
 String salute = getSalute().openDoor().join(dog -> "Who's a good dog?", neighbour-> neighbour.isLiked? "Good morning, " + neighbour.name + "!" : "*grunt*");
-getSalute().openDoor().continue(dogSaluter::salute(), neighbourSaluter::salute());
+getSalute().openDoor().continued(dogSaluter::salute(), neighbourSaluter::salute());
 ```
 
 #### Subtyping
@@ -277,7 +277,7 @@ class CardPayment extends PaymentType {
         return /* some logic here */
     }
 
-    public void continue(Action1<CardPayment> continuationLeft, Action1<PayPalPayment> continuationMiddle, Action1<BankTransferPayment> continuationRight) {
+    public void continued(Action1<CardPayment> continuationLeft, Action1<PayPalPayment> continuationMiddle, Action1<BankTransferPayment> continuationRight) {
         continuationLeft.call(value);
     }
 
@@ -301,7 +301,7 @@ class PayPalPayment extends PaymentType {
         return /* some logic here */
     }
 
-    public void continue(Action1<CardPayment> continuationLeft, Action1<PayPalPayment> continuationMiddle, Action1<BankTransferPayment> continuationRight) {
+    public void continued(Action1<CardPayment> continuationLeft, Action1<PayPalPayment> continuationMiddle, Action1<BankTransferPayment> continuationRight) {
         continuationMiddle.call(value);
     }
 
@@ -323,7 +323,7 @@ class BankTransferPayment extends PaymentType {
         return /* some logic here */
     }
 
-    public void continue(Action1<CardPayment> continuationLeft, Action1<PayPalPayment> continuationMiddle, Action1<BankTransferPayment> continuationRight) {
+    public void continued(Action1<CardPayment> continuationLeft, Action1<PayPalPayment> continuationMiddle, Action1<BankTransferPayment> continuationRight) {
         continuationRight.call(value);
     }
 
@@ -336,7 +336,7 @@ class BankTransferPayment extends PaymentType {
 
 PaymentType payment = getUserPayment();
 if (payment.valid()) {
-    payment.continue(paymentService::byCard(), paymentService::withPayPal(), paymentService::viaBankTransfer())
+    payment.continued(paymentService::byCard(), paymentService::withPayPal(), paymentService::viaBankTransfer())
 }
 ```
 
