@@ -75,7 +75,7 @@ public final class GenericUnions {
         };
     }
 
-    public static <T, U> Union2.Factory<T, U> dupletFactory() {
+    public static <T, U> Union2.Factory<T, U> doubletFactory() {
         return new Union2.Factory<T, U>() {
             @Override
             public Union2<T, U> first(T t) {
