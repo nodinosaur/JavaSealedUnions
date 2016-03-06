@@ -2,7 +2,7 @@
 
 ## ACKNOWLEDGEMENTS
 
-This library was heavily inspired by [RxEither](https://github.com/eleventigers/rxeither) and the wonderful [Domain Driven Design](http://fsharpforfunandprofit.com/ddd/) talk by [Scott Wlaschin](https://github.com/swlaschin).
+This library was heavily inspired by [RxEither](https://github.com/eleventigers/rxeither) and the wonderful [Domain Driven Design](http://fsharpforfunandprofit.com/ddd/) (DDD) talk by [Scott Wlaschin](https://github.com/swlaschin).
 
 ## RATIONALE
 JavaSealedUnions brings unions into idiomatic Java to allow for better domain modelling. It can also help representing sealed classes, but that is not the main focus.
@@ -13,15 +13,15 @@ The most frequent approach to solve this modelling problem is having a base clas
 
 The intent of this library is to create a set of classses that can host one or several arbitrary complex types. Historically other libraries like Guava or RxJava have provided types to solve this issue:
 
-* The base case is `Result<T>`, which is the union of two types: `Some<T>` and `None`.
+* The base case is `Result<T>` (also known as `Optional`), which is the union of two types: `Some<T>` and `None`.
 
 * The next case is `Either<A, B>` or `Try<T, Exception>`, which wraps the union of two arbitrary types `Left<L>` and `Right<R>`, or `Success<T>` and `Failure<Exception>`.
 
 For a higher number of parameters no abstraction is usually provided, and it's when other languages change to explicit union types. As Java doesn't have unions on the language, we have to continue abstracting away with 3 types (Left<L>, Middle<M> and Right<R>), 4 types, 5 types...etc. 
 
-I'm calling them `Union1<T>` for `Result`, `Union2<L, R>` for `Either`/`Try`, `Union3<L, M, R>`...up to `UnionN`, which for this library would be `Union9<A,B,C,D,E,F,G,H,I>`
+We're calling them `Union1<T>` for `Result`, `Union2<L, R>` for `Either`/`Try`, `Union3<L, M, R>`...up to `UnionN`, which for this library would be `Union9<A, B, C, D, E, F, G, H, I>`
 
-I recommend watching the talk linked above first to see what solutions this library provides.
+I recommend watching the DDD talk linked above first to see what solutions this library provides.
 
 ## API
 Now that we understand what abstraction has to provide, we have to define a public API:
