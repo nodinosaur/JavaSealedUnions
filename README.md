@@ -162,7 +162,7 @@ public class Salute {
         this.either = either;
     }
 
-    public void openDoor(Consumer<Dog> continueDog, Consumer<Neighbour> consumeNeighbour) {
+    public void openDoor(Consumer<Dog> continueDog, Consumer<Neighbour> continueNeighbour) {
         return either.continued(continueDog, consumeNeighbour);
     }
 
