@@ -125,9 +125,8 @@ public interface Factory<Left, Right> {
 This set of classes are provided by the library to wrap any class regardless of its type. They come in flavours from `Union1` to `Union9`, or the specialized types `Result<T>`, `Try<T>` and `Either<T, U>`.
 
 #### Generic unions
-`GenericUnions` is a class with factories for all the union types. Factory names are `resultFactory()`, `eitherFactory()`, `tryFactory()`, `singletFactory()`, `dupletFactory()`, `tripletFactory()`, `quartetFactory()`, `quintetFactory()`, `sextetFactory()`, `septetFactory()`, `octetFactory()` and `ninetetFactory()`.
+`GenericUnions` is a class with factories for all the union types. Factories can be provided by calling one of `singletFactory()`, `dupletFactory()`, `tripletFactory()`, `quartetFactory()`, `quintetFactory()`, `sextetFactory()`, `septetFactory()`, `octetFactory()` and `ninetetFactory()`.
 ```
-
 ```
 
 #### Result
