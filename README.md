@@ -23,12 +23,12 @@ We're calling them `Union1<T>` for `Result`, `Union2<L, R>` for `Either`/`Try`, 
 
 I recommend watching the DDD talk linked above first to see what solutions this library provides.
 
-## API
-Now that we understand what abstraction has to provide, we have to define a public API:
+## INTERFACES
+Now that we understand what the abstraction has to provide, we have to define a public API:
 
 *What defines a union?*
 
-It's a container that allows storage of a single element that can be from any of 2-N different types. It's container and implementation agnostic. The only requirement is to have ways to retrieve the data inside. To be properly composable it requires using interface composition rather than abstract inheritance.
+It's a type that allows storage of a single element that can be from any of 2-N different types. It's container and implementation agnostic. The only requirement is to have ways to retrieve the data inside. To be properly composable it requires using interface composition rather than abstract inheritance.
 
 *What belongs in the interface?*
 
@@ -68,13 +68,13 @@ It suffers from the same carences as nested ifs: it requires programmer discipli
 
 - Continuations: provide the union with one method per type in it that tells how the dereferencing operation has to continue. It branches execution synchronously into the continuations without having to check types externally. The type checks happen internally as each implementation of the union knows only how to dereference itself. It doesn't allow representating incorrect states, dereferencing unavailable types, or any other causes of Exceptions save for NPEs.
 
-- Joining: provide a function per element in the union that maps them back into a single, common type, that the current execution flow knows how to use. The mapping is applied synchronously and the flow continues on the same method.
+- Joining: provide a function per element in the union that maps them back into a single common type that the current execution flow knows how to use. The mapping is applied synchronously and the flow continues on the same method.
 
-
-### Basic interface
-For my library I have chosen continuations and joining as the default methods in the interface.
+For the library I have chosen continuations and joining as the default methods in the interface.
 
 **NOTE: you should never ever require or implement `getXXX()` as a way of returning a type inside the union. It defeats the purpose of the library. Direct dereference is error-prone, tends to be abused by programmers, and has been cited as a mistake when creating `Optional`-like libraries.**
+
+### Final implementation of Union2
 
 ```
 public interface Union2<Left, Right> {
@@ -103,9 +103,9 @@ Part of creating a union is that the union itself is a new type and has to be re
 ```
 public interface Factory<Left, Right> {
 
-    Union2<Left, Right> first(Left left);
+    Union2<Left, Right> first(Left first);
 
-    Union2<Left, Right> second(Right right);
+    Union2<Left, Right> second(Right second);
 
 }
 ```
@@ -121,17 +121,17 @@ This set of classes are provided by the library to wrap any class regardless of 
 ```
 
 #### Result
-Result is a specialization of Union1<T> that takes a result, or an absence of one. A factory is available at `GenericUtils.resultFactory()`.
+Result is a specialization of Union1<T> that takes a result, or an absence of one. A factory is available at `GenericUnions.resultFactory()`.
 ```
 ```
 
 #### Try
-Try is a specialization of Union2<T, Exception> that takes a value or an error. A factory is available at `GenericUtils.tryFactory()`.
+Try is a specialization of Union2<T, Exception> that takes a value or an error. A factory is available at `GenericUnions.tryFactory()`.
 ```
 ```
 
 #### Either
-Either is a specialization of Union2<T, U> that takes a left and right value. A factory is available at `GenericUtils.eitherFactory()`.
+Either is a specialization of Union2<T, U> that takes a left and right value. A factory is available at `GenericUnions.eitherFactory()`.
 ```
 ```
 
