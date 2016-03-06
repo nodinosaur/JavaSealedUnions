@@ -155,7 +155,7 @@ serverResponse.continue(getCommandExecutor::execute(), getUi()::showError());
 In case you want your unions to be driven by your domain, there are two approaches:
 
 #### Factory class plus generic wrapper
-A parent class gives a more especific access to its methods.
+A parent class gives a more explicit access to its methods.
 ```
 public class Salute {
 
