@@ -147,7 +147,7 @@ public class Right<L, R> implements Union2<L, R> {
 // Example
 
 Either<Command, Exception> serverResponse = getResponse();
-serverResponse.continue(getCommandExecutor::execute(), getUi()::showError());
+serverResponse.continue(getCommandExecutor()::execute(), getUi()::showError());
 ```
 
 ### Typed wrappers
