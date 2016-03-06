@@ -5,9 +5,7 @@
 This library was heavily inspired by [RxEither](https://github.com/eleventigers/rxeither) and the wonderful [Domain Driven Design](http://fsharpforfunandprofit.com/ddd/) talk by [Scott Wlaschin](https://github.com/swlaschin).
 
 ## RATIONALE
-I recommend watching the talk linked above first to see what solutions this library provides.
-
-Java's type system is considered not very powerful although it contains most OOP niceties. Some of the most known absences are tagged unions or sealed classes, [available in languages like Kotlin](https://kotlinlang.org/docs/reference/classes.html#sealed-classes).
+Java's type system is considered not very powerful although it contains most OOP niceties. Some of the most known absences are sealed classes and [tagged unions](https://en.wikipedia.org/wiki/Tagged_union), available in languages like [Kotlin](https://kotlinlang.org/docs/reference/classes.html#sealed-classes) or [Rust](https://doc.rust-lang.org/book/enums.html) respectively. JavaSealedUnions brings unions and part of sealed classes into idiomatic Java.
 
 Most current approach is having a base class or interface `IMyContract` and implementing several of `IChildContractPlusExtras` for public scopes. Another alternative is having a public `abstract` class that is inherited by a small set of package-only classes. The problem with the first approach is the possibility of breaking encapsulation and being able to implement the interface by a 3rd party outside the desired outcomes. The second approach hides the implementations for you, which requires the use of runtime tools like `instanceof` to handle. Both cases have one common problem: they only allow association of classes that are of the same type, or in the same hierarchy.
 
@@ -21,6 +19,7 @@ For a higher number of parameters no abstraction is usually provided, and it's w
 
 I'm calling them `Union1<T>` for `Optional`, `Union2<L, R>` for `Either`/`Result`, `Union3<L, M, R>`...up to `UnionN`, which for this library would be `Union9<A,B,C,D,E,F,G,H,I>`
 
+I recommend watching the talk linked above first to see what solutions this library provides.
 
 ## API
 Now that we understand what abstraction has to provide, we have to define a public API:
