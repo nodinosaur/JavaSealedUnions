@@ -7,7 +7,7 @@ This library was heavily inspired by [RxEither](https://github.com/eleventigers/
 ## RATIONALE
 I recommend watching the talk linked above first to see what solutions this library provides.
 
-Java's type system is considered not very powerful although it contains most OOP niceties. One of the most known absences are the so-called tagged unions or sealed classes, [available in languages like Kotlin](https://kotlinlang.org/docs/reference/classes.html#sealed-classes).
+Java's type system is considered not very powerful although it contains most OOP niceties. One of the most known absences are tagged unions or sealed classes, [available in languages like Kotlin](https://kotlinlang.org/docs/reference/classes.html#sealed-classes).
 
 Most current approach is having a base class or interface `IMyContract` and implementing several of `IChildContractPlusExtras` for public scopes. Another alternative is having a public `abstract` class that is inherited by a small set of package-only classes. The problem with the first approach is the possibility of breaking encapsulation and being able to implement the interface by a 3rd party outside the desired outcomes. The second approach hides the implementations for you, which requires the use of runtime tools like `instanceof` to handle. Both cases have one common problem: they only allow association of classes that are of the same type, or in the same hierarchy.
 
