@@ -96,7 +96,7 @@ public interface Factory<Left, Right> {
 ## USAGE
 
 ### Generic wrappers
-This set of classes are provided to wrap any class regardless of its type. They come in flavours from `Union1` to `Union9`.
+This set of classes are provided by the library to wrap any class regardless of its type. They come in flavours from `Union1` to `Union9`.
 
 ```
 public class Either<L, R> implements Union2.Factory<L, R> {
