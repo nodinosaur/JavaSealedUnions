@@ -113,11 +113,11 @@ This set of classes are provided by the library to wrap any class regardless of 
 ```
 public class Either<L, R> implements Union2.Factory<L, R> {
 
-        public <L, R> Either<L, R> left(L value) {
+        public <L, R> Union2<L, R> left(L value) {
             return new Left<>(value);
         }
 
-        public <L, R> Either<L, R> right(R value) {
+        public <L, R> Union2<L, R> right(R value) {
             return new Right<>(value);
         }
 }
@@ -185,11 +185,11 @@ public class Salute {
     }
 
     public static Salute dog(String name, int paws) {
-        return new Salute(FACTORY_INSTANCE.left<Dog, Neighbour>(new Dog(name, paws)));
+        return new Salute(FACTORY_INSTANCE.left(new Dog(name, paws)));
     }
 
     public static Salute neighbour(String name, String favouriteFood, boolean isLiked) {
-        return new Salute(FACTORY_INSTANCE.right<Dog, Neighbour>(new Neighbour(name, favouriteFood, isLiked)));
+        return new Salute(FACTORY_INSTANCE.right(new Neighbour(name, favouriteFood, isLiked)));
     }
 
     private final Union2<Dog, Neighbour> either;
