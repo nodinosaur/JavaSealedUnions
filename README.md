@@ -186,9 +186,9 @@ getSalute().openDoor(dogSaluter::salute(), neighbourSaluter::salute());
 #### Subclassing
 This ties up to the inheritance approach, except it's sealed and explicit. It can be done by both abstract classes or interfaces.
 
-**As a personal rule I would avoid any inherited methods, overloading, or overriding in any of the child classes. Watch the DDD talk in the Acknowledgements section to better understand the use of union types as plain data.
+**As a personal rule I would avoid any inherited methods, overloading, or overriding in any of the child classes. Watch the DDD talk in the Acknowledgements section to better understand the use of union types as plain data.**
 
-The example below breaks this rule by adding a new method `valid()`.**
+**The example below breaks this rule by adding a new method `valid()`.**
 ```
 public abstract class PaymentType implements Union3<CardPayment, PayPalPayment, BankTransferPayment> {
 
