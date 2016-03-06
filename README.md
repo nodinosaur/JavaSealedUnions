@@ -148,7 +148,7 @@ Either is a specialization of Union2<T, U> that takes a left and right value. A 
 In case you want your unions to be driven by your domain, you have to create your own classes implementing the base interfaces. There are two recommended approaches:
 
 #### Holder class with generic union
-A parent class gives a more explicit access to its methods.
+A domain class giving a more explicit naming and access to its methods and content.
 ```
 public class Salute {
 
@@ -168,15 +168,19 @@ public class Salute {
         this.either = either;
     }
 
-    public Union2<Dog, Neighbour> openDoor() {
-        return either;
+    public void openDoor(Consumer<Dog> continueDog, Consumer<Neighbour> consumeNeighbour) {
+        return either.continued(continueDog, consumeNeighbour);
+    }
+
+    public String rememberSalute(Function<Dog, String> mapDog, Function<Neighbour, String> mapNeighbour) {
+        return either.join(mapDog, mapNeighbour);
     }
 }
 
 
 // Example
-String salute = getSalute().openDoor().join(dog -> "Who's a good dog?", neighbour-> neighbour.isLiked? "Good morning, " + neighbour.name + "!" : "*grunt*");
-getSalute().openDoor().continued(dogSaluter::salute(), neighbourSaluter::salute());
+String salute = getSalute().rememberSalute(dog -> "Who's a good dog?", neighbour-> neighbour.isLiked? "Good morning, " + neighbour.name + "!" : "*grunt*");
+getSalute().openDoor(dogSaluter::salute(), neighbourSaluter::salute());
 ```
 
 #### Subclassing
