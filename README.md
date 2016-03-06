@@ -80,7 +80,7 @@ For my library I have chosen continuations and joining as the default methods in
 ```
 public interface Union2<Left, Right> {
 
-    continued(Action1<Left> continuationLeft, Action1<Right> continuationRight);
+    void continued(Action1<Left> continuationLeft, Action1<Right> continuationRight);
 
     <R> R join(Func1<Left, R> mapLeft, Func1<Right, R> mapRight);
 
