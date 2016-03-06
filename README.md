@@ -2,7 +2,7 @@
 
 ## ACKNOWLEDGEMENTS
 
-This library was heavily inspired by [RxEither](https://github.com/eleventigers/rxeither) and the wonderful [Domain Driven Design](http://fsharpforfunandprofit.com/ddd/) (DDD) talk by [Scott Wlaschin](https://github.com/swlaschin). Another similar talk with a full kata is [Types + Properties = Software](https://channel9.msdn.com/Events/FSharp-Events/fsharpConf-2016/Types-Properties-Software) by [Mark Seemann](https://github.com/ploeh).
+This library was heavily inspired by [RxEither](https://github.com/eleventigers/rxeither) and the wonderful [Domain Driven Design](https://fsharpforfunandprofit.com/ddd/) (DDD) talk by [Scott Wlaschin](https://github.com/swlaschin). Another similar talk with a full kata is [Types + Properties = Software](https://channel9.msdn.com/Events/FSharp-Events/fsharpConf-2016/Types-Properties-Software) by [Mark Seemann](https://github.com/ploeh).
 
 ## RATIONALE
 JavaSealedUnions brings unions into idiomatic Java to allow for better domain modelling. It can also help representing sealed classes, but that is not the main focus.
