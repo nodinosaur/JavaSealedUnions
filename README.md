@@ -86,7 +86,7 @@ And one example usage:
 Union2<User, Team> information = serverRequester.loggedAccountInformation();
 
 // Get a single piece of information from either
-int purchases = getSalute().openDoor().join(user -> user.getPurchases(), team -> team.getAccountManager().getPurchases());
+List<Purchase> purchases = information.join(user -> user.getPurchases(), team -> team.getAccountManager().getPurchases());
 
 // Or you can finish the current method and continue somewhere else depending on the type
 information.continue(UserPageTemplater::start(), TeamPageTemplater::start());
