@@ -28,11 +28,11 @@ Now that we understand what abstraction has to provide, we have to define a publ
 
 *What defines a union?*
 
-It's a container that allows storage of 2-N different types. It's container and implementation-agnostic. To be properly composable it requires using interface composition rather than abstract inheritance.
+It's a container that allows storage of a single element that can be from any of 2-N different types. It's container and implementation agnostic. The only requirement is to have ways to retrieve the data inside. To be properly composable it requires using interface composition rather than abstract inheritance.
 
 *What belongs in the interface?*
 
-It needs to be able to dereference the types to obtain a single, inequivocous, result. It should avoid extra operations, exceptions, and error states.
+It needs to be able to dereference the types to obtain a single, inequivocous, result. It should avoid extra operations, not throw exceptions, and not be able to represent error states.
 
 How is this done in other languages?
 
