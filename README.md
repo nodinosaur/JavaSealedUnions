@@ -188,33 +188,16 @@ public abstract class PaymentType implements Union3<CardPayment, PayPalPayment, 
 
     public abstract boolean valid();
 
-    private static final Factory FACTORY_INSTANCE = new Factory();
-
-    private static class Factory implements Union3.Factory<CardPayment, PayPalPayment, BankTransferPayment> {
-
-        public CardPayment left(String cardNo, String ccv) {
-            return new CardPayment(cardNo, ccv);
-        }
-
-        public PayPalPayment middle(String paypalNo, String password) {
-            return new PayPalPayment(paypalNo, password);
-        }
-
-        public BankTransferPayment right(String accNo) {
-            return new BankTransferPayment(accNo);
-        }
-    }
-
     public static PaymentType card(String cardNo, String ccv) {
-        return FACTORY_INSTANCE.left(cardNo, ccv);
+        return new CardPayment(cardNo, ccv);
     }
 
     public static PaymentType paypal(String paypalNo, String password) {
-        return FACTORY_INSTANCE.middle(paypalNo, password);
+        return new PayPalPayment(paypalNo, password);
     }
 
     public static PaymentType bankTransfer(String accNo) {
-        return FACTORY_INSTANCE.right(accNo);
+        return new BankTransferPayment(accNo);
     }
 }
 
