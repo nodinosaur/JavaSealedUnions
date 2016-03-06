@@ -344,8 +344,6 @@ if (payment.valid()) {
 
 Copyright (c) pakoito 2016
 
-GNU GENERAL PUBLIC LICENSE
-
-Version 3, 29 June 2007
+The Apache Software License, Version 2.0
 
 See LICENSE.md
