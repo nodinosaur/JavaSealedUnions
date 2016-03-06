@@ -121,10 +121,10 @@ public interface Factory<Left, Right> {
 
 ## USAGE
 
-### Generic wrappers
+### Generic Unions
 This set of classes are provided by the library to wrap any class regardless of its type. They come in flavours from `Union1` to `Union9`, or the specialized types `Result<T>`, `Try<T>` and `Either<T, U>`.
 
-#### Generic unions
+#### Simple factories
 `GenericUnions` is a class with factories for all the union types. Factories can be provided by calling one of `singletFactory()`, `dupletFactory()`, `tripletFactory()`, `quartetFactory()`, `quintetFactory()`, `sextetFactory()`, `septetFactory()`, `octetFactory()` and `ninetetFactory()`.
 ```
 ```
@@ -138,6 +138,7 @@ Result is a specialization of Union1<T> that takes a result, or an absence of on
 Try is a specialization of Union2<T, Exception> that takes a value or an error. A factory is available at `GenericUtils.tryFactory()`.
 ```
 ```
+
 #### Either
 Either is a specialization of Union2<T, U> that takes a left and right value. A factory is available at `GenericUtils.eitherFactory()`.
 ```
@@ -146,7 +147,7 @@ Either is a specialization of Union2<T, U> that takes a left and right value. A 
 ### Typed wrappers
 In case you want your unions to be driven by your domain, you have to create your own classes implementing the base interfaces. There are two recommended approaches:
 
-#### Factory class plus generic wrapper
+#### Holder class with generic union
 A parent class gives a more explicit access to its methods.
 ```
 public class Salute {
@@ -189,10 +190,12 @@ String salute = getSalute().openDoor().join(dog -> "Who's a good dog?", neighbou
 getSalute().openDoor().continued(dogSaluter::salute(), neighbourSaluter::salute());
 ```
 
-#### Subtyping
+#### Subclassing
 This ties up to the inheritance approach, except it's sealed and explicit. It can be done by both abstract classes or interfaces.
 
-**As a personal recommendation I would avoid any inherited methods, overloading, or overriding in any of the child classes. Watch the DDD talk in the Acknowledgements section to better understand the use of union types as plain data. The example below breaks this rule by adding a new method `valid()`.**
+**As a personal rule I would avoid any inherited methods, overloading, or overriding in any of the child classes. Watch the DDD talk in the Acknowledgements section to better understand the use of union types as plain data.
+
+The example below breaks this rule by adding a new method `valid()`.**
 ```
 public abstract class PaymentType implements Union3<CardPayment, PayPalPayment, BankTransferPayment> {
 
