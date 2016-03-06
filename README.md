@@ -72,10 +72,9 @@ It suffers from the same carences as nested ifs: it requires programmer discipli
 
 
 ### Basic interface
-For my library I have chosen continuations and joining as the default methods in the interface. Optionally you can also require `isXXX()` methods for checks.
+For my library I have chosen continuations and joining as the default methods in the interface.
 
 **NOTE: you should never ever require or implement `getXXX()` as a way of returning a type inside the union. It defeats the purpose of the library. Direct dereference is error-prone, tends to be abused by programmers, and has been cited as a mistake when creating `Optional`-like libraries.**
-
 
 ```
 public interface Union2<Left, Right> {
@@ -83,14 +82,6 @@ public interface Union2<Left, Right> {
     void continued(Action1<Left> continuationLeft, Action1<Right> continuationRight);
 
     <R> R join(Func1<Left, R> mapLeft, Func1<Right, R> mapRight);
-
-    public interface Identifiable<Left, Right> extends Union2<Left, Right> {
-
-        boolean isLeft();
-
-        boolean isRight();
-
-    }
 }
 ```
 
@@ -149,6 +140,9 @@ In case you want your unions to be driven by your domain, you have to create you
 
 #### Holder class with generic union
 A domain class giving a more explicit naming and access to its methods and content.
+
+**REMINDER: you should never ever require or implement `getXXX()` as a way of returning a type inside the union.**
+
 ```
 public class Salute {
 
