@@ -136,27 +136,27 @@ public final class GenericUnions {
         return new Union5.Factory<A, B, C, D, E>() {
             @Override
             public Union5<A, B, C, D, E> first(A a) {
-                return new Union5First<A, B, C, D, E>(a);
+                return new Union5First<>(a);
             }
 
             @Override
             public Union5<A, B, C, D, E> second(B b) {
-                return new Union5Second<A, B, C, D, E>(b);
+                return new Union5Second<>(b);
             }
 
             @Override
             public Union5<A, B, C, D, E> third(C c) {
-                return new Union5Third<A, B, C, D, E>(c);
+                return new Union5Third<>(c);
             }
 
             @Override
             public Union5<A, B, C, D, E> fourth(D d) {
-                return new Union5Fourth<A, B, C, D, E>(d);
+                return new Union5Fourth<>(d);
             }
 
             @Override
             public Union5<A, B, C, D, E> fifth(E e) {
-                return new Union5Fifth<A, B, C, D, E>(e);
+                return new Union5Fifth<>(e);
             }
         };
     }
@@ -165,32 +165,32 @@ public final class GenericUnions {
         return new Union6.Factory<A, B, C, D, E, F>() {
             @Override
             public Union6<A, B, C, D, E, F> first(A a) {
-                return new Union6First<A, B, C, D, E, F>(a);
+                return new Union6First<>(a);
             }
 
             @Override
             public Union6<A, B, C, D, E, F> second(B b) {
-                return new Union6Second<A, B, C, D, E, F>(b);
+                return new Union6Second<>(b);
             }
 
             @Override
             public Union6<A, B, C, D, E, F> third(C c) {
-                return new Union6Third<A, B, C, D, E, F>(c);
+                return new Union6Third<>(c);
             }
 
             @Override
             public Union6<A, B, C, D, E, F> fourth(D d) {
-                return new Union6Fourth<A, B, C, D, E, F>(d);
+                return new Union6Fourth<>(d);
             }
 
             @Override
             public Union6<A, B, C, D, E, F> fifth(E e) {
-                return new Union6Fifth<A, B, C, D, E, F>(e);
+                return new Union6Fifth<>(e);
             }
 
             @Override
             public Union6<A, B, C, D, E, F> sixth(F f) {
-                return new Union6Sixth<A, B, C, D, E, F>(f);
+                return new Union6Sixth<>(f);
             }
         };
     }
