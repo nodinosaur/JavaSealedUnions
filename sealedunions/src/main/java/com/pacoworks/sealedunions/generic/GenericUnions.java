@@ -28,7 +28,7 @@ public final class GenericUnions {
 
             @Override
             public Union1<Result> none() {
-                return new Union1Absent<>();
+                return new Union1None<>();
             }
         };
     }
