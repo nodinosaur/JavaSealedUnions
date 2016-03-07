@@ -25,7 +25,7 @@ import org.junit.Test;
 
 import com.pacoworks.sealedunions.*;
 
-public class EitherTest {
+public class GenericUnionsTest {
     public static final String VALID = "a";
 
     public static final String INVALID = "";
