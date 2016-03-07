@@ -38,4 +38,23 @@ final class Union1First<T> implements Union1<T> {
     public <R> R join(Function<T, R> mapFirst, Supplier<R> mapNone) {
         return mapFirst.apply(value);
     }
+
+    public boolean equals(Object o) {
+        if (o == this)
+            return true;
+        if (!(o instanceof Union1First))
+            return false;
+        final Union1First other = (Union1First)o;
+        final Object this$value = this.value;
+        final Object other$value = other.value;
+        return this$value == null ? other$value == null : this$value.equals(other$value);
+    }
+
+    public int hashCode() {
+        final int PRIME = 59;
+        int result = 1;
+        final Object $value = this.value;
+        result = result * PRIME + ($value == null ? 0 : $value.hashCode());
+        return result;
+    }
 }

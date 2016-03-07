@@ -32,4 +32,18 @@ final class Union1None<T> implements Union1<T> {
     public <R> R join(Function<T, R> mapFirst, Supplier<R> mapNone) {
         return mapNone.get();
     }
+
+    public boolean equals(Object o) {
+        if (o == this)
+            return true;
+        if (!(o instanceof Union1None))
+            return false;
+        final Union1None other = (Union1None)o;
+        return true;
+    }
+
+    public int hashCode() {
+        int result = 1;
+        return result;
+    }
 }

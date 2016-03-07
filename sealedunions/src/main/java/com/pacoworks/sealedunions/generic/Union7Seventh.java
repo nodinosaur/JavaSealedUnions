@@ -42,4 +42,23 @@ final class Union7Seventh<A, B, C, D, E, F, G> implements Union7<A, B, C, D, E, 
             Function<G, R> mapSeventh) {
         return mapSeventh.apply(value);
     }
+
+    public boolean equals(Object o) {
+        if (o == this)
+            return true;
+        if (!(o instanceof Union7Seventh))
+            return false;
+        final Union7Seventh other = (Union7Seventh)o;
+        final Object this$value = this.value;
+        final Object other$value = other.value;
+        return this$value == null ? other$value == null : this$value.equals(other$value);
+    }
+
+    public int hashCode() {
+        final int PRIME = 59;
+        int result = 1;
+        final Object $value = this.value;
+        result = result * PRIME + ($value == null ? 0 : $value.hashCode());
+        return result;
+    }
 }

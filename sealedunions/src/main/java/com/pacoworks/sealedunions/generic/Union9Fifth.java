@@ -43,4 +43,23 @@ final class Union9Fifth<A, B, C, D, E, F, G, H, I> implements Union9<A, B, C, D,
             Function<G, R> mapSeventh, Function<H, R> mapEighth, Function<I, R> mapNinth) {
         return mapFifth.apply(value);
     }
+
+    public boolean equals(Object o) {
+        if (o == this)
+            return true;
+        if (!(o instanceof Union9Fifth))
+            return false;
+        final Union9Fifth other = (Union9Fifth)o;
+        final Object this$value = this.value;
+        final Object other$value = other.value;
+        return this$value == null ? other$value == null : this$value.equals(other$value);
+    }
+
+    public int hashCode() {
+        final int PRIME = 59;
+        int result = 1;
+        final Object $value = this.value;
+        result = result * PRIME + ($value == null ? 0 : $value.hashCode());
+        return result;
+    }
 }

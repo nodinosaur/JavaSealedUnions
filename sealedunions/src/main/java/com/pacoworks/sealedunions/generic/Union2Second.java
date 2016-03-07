@@ -37,4 +37,23 @@ final class Union2Second<T, U> implements Union2<T, U> {
     public <R> R join(Function<T, R> mapFirst, Function<U, R> mapSecond) {
         return mapSecond.apply(value);
     }
+
+    public boolean equals(Object o) {
+        if (o == this)
+            return true;
+        if (!(o instanceof Union2Second))
+            return false;
+        final Union2Second other = (Union2Second)o;
+        final Object this$value = this.value;
+        final Object other$value = other.value;
+        return this$value == null ? other$value == null : this$value.equals(other$value);
+    }
+
+    public int hashCode() {
+        final int PRIME = 59;
+        int result = 1;
+        final Object $value = this.value;
+        result = result * PRIME + ($value == null ? 0 : $value.hashCode());
+        return result;
+    }
 }

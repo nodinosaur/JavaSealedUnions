@@ -42,4 +42,23 @@ final class Union8Fourth<A, B, C, D, E, F, G, H> implements Union8<A, B, C, D, E
             Function<G, R> mapSeventh, Function<H, R> mapEighth) {
         return mapFourth.apply(value);
     }
+
+    public boolean equals(Object o) {
+        if (o == this)
+            return true;
+        if (!(o instanceof Union8Fourth))
+            return false;
+        final Union8Fourth other = (Union8Fourth)o;
+        final Object this$value = this.value;
+        final Object other$value = other.value;
+        return this$value == null ? other$value == null : this$value.equals(other$value);
+    }
+
+    public int hashCode() {
+        final int PRIME = 59;
+        int result = 1;
+        final Object $value = this.value;
+        result = result * PRIME + ($value == null ? 0 : $value.hashCode());
+        return result;
+    }
 }

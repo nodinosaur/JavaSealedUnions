@@ -39,4 +39,23 @@ final class Union4Third<A, B, C, D> implements Union4<A, B, C, D> {
             Function<D, R> mapFourth) {
         return mapThird.apply(value);
     }
+
+    public boolean equals(Object o) {
+        if (o == this)
+            return true;
+        if (!(o instanceof Union4Third))
+            return false;
+        final Union4Third other = (Union4Third)o;
+        final Object this$value = this.value;
+        final Object other$value = other.value;
+        return this$value == null ? other$value == null : this$value.equals(other$value);
+    }
+
+    public int hashCode() {
+        final int PRIME = 59;
+        int result = 1;
+        final Object $value = this.value;
+        result = result * PRIME + ($value == null ? 0 : $value.hashCode());
+        return result;
+    }
 }
