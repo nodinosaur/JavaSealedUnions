@@ -5,23 +5,23 @@
 This library was heavily inspired by [RxEither](https://github.com/eleventigers/rxeither) and the wonderful [Domain Driven Design](https://fsharpforfunandprofit.com/ddd/) (DDD) talk by [Scott Wlaschin](https://github.com/swlaschin). Another similar talk with a full kata is [Types + Properties = Software](https://channel9.msdn.com/Events/FSharp-Events/fsharpConf-2016/Types-Properties-Software) by [Mark Seemann](https://github.com/ploeh).
 
 ## RATIONALE
-JavaSealedUnions brings unions into idiomatic Java 8 to allow for better domain modelling. It can also help representing sealed classes, but that is not the main focus. Chaining operations and monadic composition using JavaSealedUnions is also outside the scope of the library, but any union can be lifted to other frameworks like [RxJava](http://reactivex.io/) and [Javaslang](http://www.javaslang.io/). A backport library for RxJava and Java 7 is available at [pakoito/RxSealedUnions](https://github.com/pakoito/RxSealedUnions).
+JavaSealedUnions brings unions into idiomatic Java 8 to allow for better domain modelling. It can also help representing sealed classes, but that is not the main focus. Chaining operations and monadic composition using JavaSealedUnions is also outside the scope of the library, but any union can be lifted to other frameworks like [RxJava](http://reactivex.io/) and [Javaslang](http://www.javaslang.io/). A backport library for RxJava and Java 6 is available at [pakoito/RxSealedUnions](https://github.com/pakoito/RxSealedUnions).
 
-Java's type system is considered not very powerful although it contains most OOP niceties. Some of the most known absences are sealed classes and [tagged unions](https://en.wikipedia.org/wiki/Tagged_union). Sealed classes are available in languages like [Kotlin](https://kotlinlang.org/docs/reference/classes.html#sealed-classes), or [C#](https://msdn.microsoft.com/en-gb/library/88c54tsw.aspx). Tagged unions are common on [Swift](https://developer.apple.com/library/ios/documentation/Swift/Conceptual/Swift_Programming_Language/Enumerations.html) and [Rust](https://doc.rust-lang.org/book/enums.html).
+Java's type system is considered not very powerful although it contains most OOP niceties. Some of the most known absences are [tagged unions](https://en.wikipedia.org/wiki/Tagged_union) and sealed classes. Sealed classes are available in languages like [Kotlin](https://kotlinlang.org/docs/reference/classes.html#sealed-classes), or [C#](https://msdn.microsoft.com/en-gb/library/88c54tsw.aspx). Tagged unions are common on [Swift](https://developer.apple.com/library/ios/documentation/Swift/Conceptual/Swift_Programming_Language/Enumerations.html) and [Rust](https://doc.rust-lang.org/book/enums.html).
 
-The most frequent approach to solve this modelling problem is having a base class or interface `IMyContract` and implementing several of `IChildContractPlusExtras` for public scopes. Another alternative is having a public `abstract` class that is inherited by a small set of package-only classes. The problem with the first approach is the possibility of breaking encapsulation and being able to implement the interface by a 3rd party outside the desired outcomes. The second approach hides the implementations for you, which requires the use of runtime tools like `instanceof` to handle. Both cases have one common problem: they only allow association of classes that are of the same type, or in the same hierarchy.
+The most frequent approach to solve this modelling problem in Java is having a base class or interface `IMyContract` and implementing several of `IChildContractPlusExtras` for public scopes. Another alternative is having a public `abstract` class that is inherited by a small set of package-only classes. The problem with the first approach is the possibility of breaking encapsulation and being able to implement the interface by a 3rd party outside the desired outcomes. The second approach hides the implementations for you, which requires the use of runtime tools like `instanceof` to handle. Both cases have one common problem: they only allow association of classes that are of the same type, or in the same hierarchy.
 
-The intent of this library is to create a set of classses that can host one or several arbitrary complex types. Historically other libraries like Guava or RxJava have provided types to solve this issue:
+The intent of this library is to create a set of classes that can host one element of one to several arbitrary complex types. Historically other libraries like Guava or RxJava have provided chainable types to solve this issue:
 
 * The base case is `Result<T>` (also known as `Optional`), which is the union of two types: `Some<T>` and `None`.
 
-* The next case is `Either<A, B>` or `Try<T, Exception>`, which wraps the union of two arbitrary types `Left<L>` and `Right<R>`, or `Success<T>` and `Failure<Exception>`.
+* The next case is `Either<A, B>` or `Try<T, Exception>`, which respectively wrap the union of two arbitrary types `Left<L>` and `Right<R>`, or `Success<T>` and `Failure<Exception>`.
 
-For a higher number of parameters no abstraction is usually provided, and it's when other languages change to explicit union types. As Java doesn't have unions on the language, we have to continue abstracting away with 3 types (Left<L>, Middle<M> and Right<R>), 4 types, 5 types...etc. 
+For a higher number of parameters no abstraction is usually provided, and it's when other languages change to explicit union types. As Java does not have unions on the language, we have to continue abstracting away with 3 types (Left<L>, Middle<M> and Right<R>), 4 types, 5 types...etc.
 
-We're calling them `Union1<T>` for `Result`, `Union2<L, R>` for `Either`/`Try`, `Union3<L, M, R>`...up to `UnionN`, which for this library would be `Union9<A, B, C, D, E, F, G, H, I>`
+We're calling them `Union1<T>` for `Result`/`Optional`, `Union2<L, R>` for `Either`/`Try`, `Union3<L, M, R>`...up to `UnionN`, which for this library would be `Union9<A, B, C, D, E, F, G, H, I>`.
 
-I recommend watching the DDD talk linked above first to see what solutions this library provides.
+I heavily recommend watching the DDD talk linked above first to see what solutions this library provides compared to chainable types. Unions are used for intra-layer modelling, chainables are more fit for inter-layer communication.
 
 ## INTERFACES
 Now that we understand what the abstraction has to provide, we have to define a public API:
@@ -32,9 +32,9 @@ It's a type that allows storage of a single element that can be from any of 2-N 
 
 *What belongs in the interface?*
 
-It needs to be able to dereference the types to obtain a single, inequivocous, result. It should avoid extra operations, not throw exceptions, and not be able to represent error states.
+It needs to be able to dereference the types to obtain a single, unequivocal, result. It should avoid extra operations, not throw exceptions, and not be able to represent error states.
 
-*How is this done in other languages?*
+*How is this done in other languages or frameworks?*
 
 - Nested ifs:
 
@@ -62,13 +62,13 @@ if (element instanceof One) {
     /* do something with two*/
 } else...
 ```
-It suffers from the same carences as nested ifs: it requires programmer discipline to remember and check before casting, plus it leans to the same errors. The only change is that it now requires two operations: `instanceof` and a cast.
+It suffers from the same shortcomings as nested ifs: it requires programmer discipline to remember and check before casting, plus it leans to the same errors. The only change is that it now requires two operations: `instanceof` and a cast.
 
-- Pattern matching: not available in Java. But the intent of a pattern matcher is double: either continue to another piece of code, or return a single element. This ties directly to the next two options.
+- Pattern matching: not available in Java. But the intent of a pattern matcher is double: either continue to another piece of code, or return a single result element. This ties directly to the next two points.
 
-- Continuations: provide the union with one method per type in it that tells how the dereferencing operation has to continue. It branches execution synchronously into the continuations without having to check types externally. The type checks happen internally as each implementation of the union knows only how to dereference itself. It doesn't allow representating incorrect states, dereferencing unavailable types, or any other causes of Exceptions save for NPEs.
+- Continuations: part of [Inversion of Control](https://en.wikipedia.org/wiki/Inversion_of_control), it's a principle where a function decides what to do with the execution flow after it's done. In this case you provide one method per type in the union indicating how the operation has to continue after dereferencing. It branches execution synchronously into the continuations without having to check types externally. It does not allow representing incorrect states, dereferencing unavailable types, or any other causes of Exceptions save for NPEs.
 
-- Joining: provide a function per element in the union that maps them back into a single common type that the current execution flow knows how to use. The mapping is applied synchronously and the flow continues on the same method.
+- Joining: provide a function per element in the union that maps them back into a single common type that the current execution flow knows how to use. The mapping is applied synchronously and the flow continues on the same method. The caller is responsible of assuring the mapping operation is correct, or have a fallback case.
 
 For the library I have chosen continuations and joining as the default methods in the interface.
 
@@ -112,12 +112,32 @@ public interface Factory<Left, Right> {
 
 ## USAGE
 
-### Generic Unions
-This set of classes are provided by the library to wrap any class regardless of its type. They come in flavours from `Union1` to `Union9`, or the specialized types `Result<T>`, `Try<T>` and `Either<T, U>`.
-
-#### Simple factories
-`GenericUnions` is a class with factories for all the union types. Factories can be provided by calling one of `singletFactory()`, `doubletFactory()`, `tripletFactory()`, `quartetFactory()`, `quintetFactory()`, `sextetFactory()`, `septetFactory()`, `octetFactory()` and `nonetFactory()`.
+### Generic unions
+This set of classes are provided by the library to wrap any class regardless of its type. They come in flavours from `Union1` to `Union9`. `GenericUnions` is a class with factories for all the union types. Factories can be provided by calling one of `singletFactory()`, `doubletFactory()`, `tripletFactory()`, `quartetFactory()`, `quintetFactory()`, `sextetFactory()`, `septetFactory()`, `octetFactory()` and `nonetFactory()`.
 ```
+public class LoggedInAccount {
+    public final String id;
+
+    public long timestamp;
+
+    public final Union4<User, Group, Administrator, Guest> account;
+
+    public LoggedInAccount(String id, long timestamp, Union4<User, Group, Administrator, Guest> account){
+        this.id = id;
+        this.timestamp = timestamp;
+        this.account = account;
+    }
+}
+
+public LoggedInAccount login(String id){
+    Union4.Factory<User, Group, Administrator, Guest> quartetFactory = GenericUnions.quartetFactory();
+    Union4<User, Group, Administrator, Guest> user =
+                                                database.getAccount(id)
+                                                    ? quartetFactory.third(database.requestAdmin(id)
+                                                    : quartetFactory.first(database.requestUser(id))
+    LoggedInAccount account = new LoggedInAcctount(id, System.currentTimeMillis(), user);
+    return account;
+}
 ```
 
 ### Typed wrappers
