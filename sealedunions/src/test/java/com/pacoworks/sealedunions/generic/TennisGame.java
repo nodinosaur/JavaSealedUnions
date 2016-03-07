@@ -20,12 +20,10 @@ import java.util.function.Function;
 
 import javafx.util.Pair;
 
-import org.junit.Test;
-
 import com.pacoworks.sealedunions.Union2;
 import com.pacoworks.sealedunions.Union4;
 
-public class TennisTest {
+public class TennisGame {
     public static Score scorePoint(Score score, Player player) {
         return score.getScore().join(scorePoints(player), scoreAdvantage(player),
                 scoreDeuce(player), scoreGame(player));
@@ -34,9 +32,9 @@ public class TennisTest {
     private static Function<Points, Score> scorePoints(Player player) {
         return points -> {
             if (isPlayerForty(points.getKey())) {
-                return TennisTest.Score.game(Game.one());
+                return Score.game(Game.one());
             } else if (isPlayerForty(points.getValue())) {
-                return TennisTest.Score.game(Game.two());
+                return Score.game(Game.two());
             } else {
                 return player.getPlayer().join(
                         one -> Score.points(new Points(score(points.getKey()), points.getValue())),
@@ -84,10 +82,6 @@ public class TennisTest {
         return game -> player.getPlayer().join(
                 one -> Score.points(new Points(PlayerPoints.fifteen(), PlayerPoints.zero())),
                 second -> Score.points(new Points(PlayerPoints.zero(), PlayerPoints.fifteen())));
-    }
-
-    @Test
-    public void testTennis() throws Exception {
     }
 
     public interface Score {
@@ -163,6 +157,16 @@ public class TennisTest {
     }
 
     public interface Player {
+        static Advantage one() {
+            return () -> GenericUnions.<PlayerOne, PlayerTwo> doubletFactory()
+                    .first(new PlayerOne());
+        }
+
+        static Advantage two() {
+            return () -> GenericUnions.<PlayerOne, PlayerTwo> doubletFactory()
+                    .second(new PlayerTwo());
+        }
+
         Union2<PlayerOne, PlayerTwo> getPlayer();
     }
 
