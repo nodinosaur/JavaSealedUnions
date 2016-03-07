@@ -199,37 +199,37 @@ public final class GenericUnions {
         return new Union7.Factory<A, B, C, D, E, F, G>() {
             @Override
             public Union7<A, B, C, D, E, F, G> first(A a) {
-                return new Union7First<A, B, C, D, E, F, G>(a);
+                return new Union7First<>(a);
             }
 
             @Override
             public Union7<A, B, C, D, E, F, G> second(B b) {
-                return new Union7Second<A, B, C, D, E, F, G>(b);
+                return new Union7Second<>(b);
             }
 
             @Override
             public Union7<A, B, C, D, E, F, G> third(C c) {
-                return new Union7Third<A, B, C, D, E, F, G>(c);
+                return new Union7Third<>(c);
             }
 
             @Override
             public Union7<A, B, C, D, E, F, G> fourth(D d) {
-                return new Union7Fourth<A, B, C, D, E, F, G>(d);
+                return new Union7Fourth<>(d);
             }
 
             @Override
             public Union7<A, B, C, D, E, F, G> fifth(E e) {
-                return new Union7Fifth<A, B, C, D, E, F, G>(e);
+                return new Union7Fifth<>(e);
             }
 
             @Override
             public Union7<A, B, C, D, E, F, G> sixth(F f) {
-                return new Union7Sixth<A, B, C, D, E, F, G>(f);
+                return new Union7Sixth<>(f);
             }
 
             @Override
             public Union7<A, B, C, D, E, F, G> seventh(G g) {
-                return new Union7Seventh<A, B, C, D, E, F, G>(g);
+                return new Union7Seventh<>(g);
             }
         };
     }
@@ -238,42 +238,42 @@ public final class GenericUnions {
         return new Union8.Factory<A, B, C, D, E, F, G, H>() {
             @Override
             public Union8<A, B, C, D, E, F, G, H> first(A a) {
-                return new Union8First<A, B, C, D, E, F, G, H>(a);
+                return new Union8First<>(a);
             }
 
             @Override
             public Union8<A, B, C, D, E, F, G, H> second(B b) {
-                return new Union8Second<A, B, C, D, E, F, G, H>(b);
+                return new Union8Second<>(b);
             }
 
             @Override
             public Union8<A, B, C, D, E, F, G, H> third(C c) {
-                return new Union8Third<A, B, C, D, E, F, G, H>(c);
+                return new Union8Third<>(c);
             }
 
             @Override
             public Union8<A, B, C, D, E, F, G, H> fourth(D d) {
-                return new Union8Fourth<A, B, C, D, E, F, G, H>(d);
+                return new Union8Fourth<>(d);
             }
 
             @Override
             public Union8<A, B, C, D, E, F, G, H> fifth(E e) {
-                return new Union8Fifth<A, B, C, D, E, F, G, H>(e);
+                return new Union8Fifth<>(e);
             }
 
             @Override
             public Union8<A, B, C, D, E, F, G, H> sixth(F f) {
-                return new Union8Sixth<A, B, C, D, E, F, G, H>(f);
+                return new Union8Sixth<>(f);
             }
 
             @Override
             public Union8<A, B, C, D, E, F, G, H> seventh(G g) {
-                return new Union8Seventh<A, B, C, D, E, F, G, H>(g);
+                return new Union8Seventh<>(g);
             }
 
             @Override
             public Union8<A, B, C, D, E, F, G, H> eighth(H h) {
-                return new Union8Eighth<A, B, C, D, E, F, G, H>(h);
+                return new Union8Eighth<>(h);
             }
         };
     }
@@ -282,47 +282,47 @@ public final class GenericUnions {
         return new Union9.Factory<A, B, C, D, E, F, G, H, I>() {
             @Override
             public Union9<A, B, C, D, E, F, G, H, I> first(A a) {
-                return new Union9First<A, B, C, D, E, F, G, H, I>(a);
+                return new Union9First<>(a);
             }
 
             @Override
             public Union9<A, B, C, D, E, F, G, H, I> second(B b) {
-                return new Union9Second<A, B, C, D, E, F, G, H, I>(b);
+                return new Union9Second<>(b);
             }
 
             @Override
             public Union9<A, B, C, D, E, F, G, H, I> third(C c) {
-                return new Union9Third<A, B, C, D, E, F, G, H, I>(c);
+                return new Union9Third<>(c);
             }
 
             @Override
             public Union9<A, B, C, D, E, F, G, H, I> fourth(D d) {
-                return new Union9Fourth<A, B, C, D, E, F, G, H, I>(d);
+                return new Union9Fourth<>(d);
             }
 
             @Override
             public Union9<A, B, C, D, E, F, G, H, I> fifth(E e) {
-                return new Union9Fifth<A, B, C, D, E, F, G, H, I>(e);
+                return new Union9Fifth<>(e);
             }
 
             @Override
             public Union9<A, B, C, D, E, F, G, H, I> sixth(F f) {
-                return new Union9Sixth<A, B, C, D, E, F, G, H, I>(f);
+                return new Union9Sixth<>(f);
             }
 
             @Override
             public Union9<A, B, C, D, E, F, G, H, I> seventh(G g) {
-                return new Union9Seventh<A, B, C, D, E, F, G, H, I>(g);
+                return new Union9Seventh<>(g);
             }
 
             @Override
             public Union9<A, B, C, D, E, F, G, H, I> eighth(H h) {
-                return new Union9Eighth<A, B, C, D, E, F, G, H, I>(h);
+                return new Union9Eighth<>(h);
             }
 
             @Override
             public Union9<A, B, C, D, E, F, G, H, I> ninth(I i) {
-                return new Union9Ninth<A, B, C, D, E, F, G, H, I>(i);
+                return new Union9Ninth<>(i);
             }
         };
     }
