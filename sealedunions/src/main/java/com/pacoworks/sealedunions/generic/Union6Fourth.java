@@ -21,7 +21,7 @@ import java.util.function.Function;
 
 import com.pacoworks.sealedunions.Union6;
 
-class Union6Fourth<A, B, C, D, E, F> implements Union6<A, B, C, D, E, F> {
+final class Union6Fourth<A, B, C, D, E, F> implements Union6<A, B, C, D, E, F> {
     private final D value;
 
     public Union6Fourth(D value) {

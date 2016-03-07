@@ -21,7 +21,7 @@ import java.util.function.Function;
 
 import com.pacoworks.sealedunions.Union8;
 
-class Union8Sixth<A, B, C, D, E, F, G, H> implements Union8<A, B, C, D, E, F, G, H> {
+final class Union8Sixth<A, B, C, D, E, F, G, H> implements Union8<A, B, C, D, E, F, G, H> {
     private final F value;
 
     public Union8Sixth(F value) {

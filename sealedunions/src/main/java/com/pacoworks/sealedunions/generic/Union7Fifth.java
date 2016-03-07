@@ -21,7 +21,7 @@ import java.util.function.Function;
 
 import com.pacoworks.sealedunions.Union7;
 
-class Union7Fifth<A, B, C, D, E, F, G> implements Union7<A, B, C, D, E, F, G> {
+final class Union7Fifth<A, B, C, D, E, F, G> implements Union7<A, B, C, D, E, F, G> {
     private final E value;
 
     public Union7Fifth(E value) {
