@@ -157,12 +157,12 @@ public class TennisGame {
     }
 
     public interface Player {
-        static Advantage one() {
+        static Player one() {
             return () -> GenericUnions.<PlayerOne, PlayerTwo> doubletFactory()
                     .first(new PlayerOne());
         }
 
-        static Advantage two() {
+        static Player two() {
             return () -> GenericUnions.<PlayerOne, PlayerTwo> doubletFactory()
                     .second(new PlayerTwo());
         }
