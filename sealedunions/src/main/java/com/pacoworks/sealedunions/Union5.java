@@ -19,25 +19,75 @@ package com.pacoworks.sealedunions;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
+/**
+ * Union5 represents a union containing an element of 5 possible types
+ *
+ * @param <First> first possible type
+ * @param <Second> second possible type
+ * @param <Third> third possible type
+ * @param <Fourth> fourth possible type
+ * @param <Fifth> fifth possible type
+ */
 public interface Union5<First, Second, Third, Fourth, Fifth> {
+    /**
+     * Executes one of the continuations depending on the element type
+     */
     void continued(Consumer<First> continuationFirst, Consumer<Second> continuationSecond,
             Consumer<Third> continuationThird, Consumer<Fourth> continuationFourth,
             Consumer<Fifth> continuationFifth);
 
+    /**
+     * Transforms the element in the union to a new type
+     *
+     * @param <R> result type
+     * @return an object of the result type
+     */
     <R> R join(Function<First, R> mapFirst, Function<Second, R> mapSecond,
             Function<Third, R> mapThird, Function<Fourth, R> mapFourth,
             Function<Fifth, R> mapFifth);
 
-
+    /**
+     * Creator class for Union5
+     */
     interface Factory<First, Second, Third, Fourth, Fifth> {
-        Union5<First, Second, Third, Fourth, Fifth> first(First first);
+        /**
+         * Creates a Union5 wrapping a value of the first type
+         *
+         * @param value the value
+         * @return a Union5 object wrapping the value
+         */
+        Union5<First, Second, Third, Fourth, Fifth> first(First value);
 
-        Union5<First, Second, Third, Fourth, Fifth> second(Second second);
+        /**
+         * Creates a Union5 wrapping a value of the second type
+         *
+         * @param value the value
+         * @return a Union5 object wrapping the value
+         */
+        Union5<First, Second, Third, Fourth, Fifth> second(Second value);
 
-        Union5<First, Second, Third, Fourth, Fifth> third(Third third);
+        /**
+         * Creates a Union5 wrapping a value of the third type
+         *
+         * @param value the value
+         * @return a Union5 object wrapping the value
+         */
+        Union5<First, Second, Third, Fourth, Fifth> third(Third value);
 
-        Union5<First, Second, Third, Fourth, Fifth> fourth(Fourth fourth);
+        /**
+         * Creates a Union5 wrapping a value of the fourth type
+         *
+         * @param value the value
+         * @return a Union5 object wrapping the value
+         */
+        Union5<First, Second, Third, Fourth, Fifth> fourth(Fourth value);
 
-        Union5<First, Second, Third, Fourth, Fifth> fifth(Fifth fifth);
+        /**
+         * Creates a Union5 wrapping a value of the fifth type
+         *
+         * @param value the value
+         * @return a Union5 object wrapping the value
+         */
+        Union5<First, Second, Third, Fourth, Fifth> fifth(Fifth value);
     }
 }

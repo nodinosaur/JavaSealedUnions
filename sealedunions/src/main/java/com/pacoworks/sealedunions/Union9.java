@@ -19,45 +19,123 @@ package com.pacoworks.sealedunions;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
+/**
+ * Union9 represents a union containing an element of 9 possible types
+ *
+ * @param <First> first possible type
+ * @param <Second> second possible type
+ * @param <Third> third possible type
+ * @param <Fourth> fourth possible type
+ * @param <Fifth> fifth possible type
+ * @param <Sixth> sixth possible type
+ * @param <Seventh> seventh possible type
+ * @param <Eighth> eighth possible type
+ * @param <Ninth> ninth possible type
+ */
 public interface Union9<First, Second, Third, Fourth, Fifth, Sixth, Seventh, Eighth, Ninth> {
+    /**
+     * Executes one of the continuations depending on the element type
+     */
     void continued(Consumer<First> continuationFirst, Consumer<Second> continuationSecond,
             Consumer<Third> continuationThird, Consumer<Fourth> continuationFourth,
             Consumer<Fifth> continuationFifth, Consumer<Sixth> continuationSixth,
             Consumer<Seventh> continuationSeventh, Consumer<Eighth> continuationEighth,
             Consumer<Ninth> continuationNinth);
 
+    /**
+     * Transforms the element in the union to a new type
+     *
+     * @param <R> result type
+     * @return an object of the result type
+     */
     <R> R join(Function<First, R> mapFirst, Function<Second, R> mapSecond,
             Function<Third, R> mapThird, Function<Fourth, R> mapFourth, Function<Fifth, R> mapFifth,
             Function<Sixth, R> mapSixth, Function<Seventh, R> mapSeventh,
             Function<Eighth, R> mapEighth, Function<Ninth, R> mapNinth);
 
-
+    /**
+     * Creator class for Union9
+     */
     interface Factory<First, Second, Third, Fourth, Fifth, Sixth, Seventh, Eighth, Ninth> {
+        /**
+         * Creates a Union9 wrapping a value of the first type
+         *
+         * @param value the value
+         * @return a Union9 object wrapping the value
+         */
         Union9<First, Second, Third, Fourth, Fifth, Sixth, Seventh, Eighth, Ninth> first(
-                First first);
+                First value);
 
+        /**
+         * Creates a Union9 wrapping a value of the second type
+         *
+         * @param value the value
+         * @return a Union9 object wrapping the value
+         */
         Union9<First, Second, Third, Fourth, Fifth, Sixth, Seventh, Eighth, Ninth> second(
-                Second second);
+                Second value);
 
+        /**
+         * Creates a Union9 wrapping a value of the third type
+         *
+         * @param value the value
+         * @return a Union9 object wrapping the value
+         */
         Union9<First, Second, Third, Fourth, Fifth, Sixth, Seventh, Eighth, Ninth> third(
-                Third third);
+                Third value);
 
+        /**
+         * Creates a Union9 wrapping a value of the fourth type
+         *
+         * @param value the value
+         * @return a Union9 object wrapping the value
+         */
         Union9<First, Second, Third, Fourth, Fifth, Sixth, Seventh, Eighth, Ninth> fourth(
-                Fourth fourth);
+                Fourth value);
 
+        /**
+         * Creates a Union9 wrapping a value of the fifth type
+         *
+         * @param value the value
+         * @return a Union9 object wrapping the value
+         */
         Union9<First, Second, Third, Fourth, Fifth, Sixth, Seventh, Eighth, Ninth> fifth(
-                Fifth fifth);
+                Fifth value);
 
+        /**
+         * Creates a Union9 wrapping a value of the sixth type
+         *
+         * @param value the value
+         * @return a Union9 object wrapping the value
+         */
         Union9<First, Second, Third, Fourth, Fifth, Sixth, Seventh, Eighth, Ninth> sixth(
-                Sixth sixth);
+                Sixth value);
 
+        /**
+         * Creates a Union9 wrapping a value of the seventh type
+         *
+         * @param value the value
+         * @return a Union9 object wrapping the value
+         */
         Union9<First, Second, Third, Fourth, Fifth, Sixth, Seventh, Eighth, Ninth> seventh(
-                Seventh seventh);
+                Seventh value);
 
+        /**
+         * Creates a Union9 wrapping a value of the eighth type
+         *
+         * @param value the value
+         * @return a Union9 object wrapping the value
+         */
         Union9<First, Second, Third, Fourth, Fifth, Sixth, Seventh, Eighth, Ninth> eighth(
-                Eighth eighth);
+                Eighth value);
 
+        /**
+         * Creates a Union9 wrapping a value of the ninth type
+         *
+         * @param value the value
+         * @return a Union9 object wrapping the value
+         */
         Union9<First, Second, Third, Fourth, Fifth, Sixth, Seventh, Eighth, Ninth> ninth(
-                Ninth ninth);
+                Ninth value);
     }
 }

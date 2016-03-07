@@ -20,14 +20,42 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
+/**
+ * Union1 represents a union containing an element of 1 possible type, or none at all
+ * 
+ * @param <First> The type represented by this union
+ */
 public interface Union1<First> {
+    /**
+     * Executes one of the continuations depending on the element type
+     */
     void continued(Consumer<First> continuationFirst, Runnable continuationNone);
 
+    /**
+     * Transforms the element in the union to a new type
+     * 
+     * @param <R> result type
+     * @return an object of the result type
+     */
     <R> R join(Function<First, R> mapFirst, Supplier<R> mapNone);
 
+    /**
+     * Creator class for Union1
+     */
     interface Factory<First> {
+        /**
+         * Creates a Union1 wrapping a value
+         * 
+         * @param single the value
+         * @return a Union1 object wrapping the value
+         */
         Union1<First> first(First single);
 
+        /**
+         * Creates a Union1 wrapping no value
+         *
+         * @return a Union1 object wrapping no value
+         */
         Union1<First> none();
     }
 }

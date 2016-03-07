@@ -19,34 +19,104 @@ package com.pacoworks.sealedunions;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
+/**
+ * Union8 represents a union containing an element of 8 possible types
+ *
+ * @param <First> first possible type
+ * @param <Second> second possible type
+ * @param <Third> third possible type
+ * @param <Fourth> fourth possible type
+ * @param <Fifth> fifth possible type
+ * @param <Sixth> sixth possible type
+ * @param <Seventh> seventh possible type
+ * @param <Eighth> eighth possible type
+ */
 public interface Union8<First, Second, Third, Fourth, Fifth, Sixth, Seventh, Eighth> {
+    /**
+     * Executes one of the continuations depending on the element type
+     */
     void continued(Consumer<First> continuationFirst, Consumer<Second> continuationSecond,
             Consumer<Third> continuationThird, Consumer<Fourth> continuationFourth,
             Consumer<Fifth> continuationFifth, Consumer<Sixth> continuationSixth,
             Consumer<Seventh> continuationSeventh, Consumer<Eighth> continuationEighth);
 
+    /**
+     * Transforms the element in the union to a new type
+     *
+     * @param <R> result type
+     * @return an object of the result type
+     */
     <R> R join(Function<First, R> mapFirst, Function<Second, R> mapSecond,
             Function<Third, R> mapThird, Function<Fourth, R> mapFourth, Function<Fifth, R> mapFifth,
             Function<Sixth, R> mapSixth, Function<Seventh, R> mapSeventh,
             Function<Eighth, R> mapEighth);
 
-
+    /**
+     * Creator class for Union8
+     */
     interface Factory<First, Second, Third, Fourth, Fifth, Sixth, Seventh, Eighth> {
-        Union8<First, Second, Third, Fourth, Fifth, Sixth, Seventh, Eighth> first(First first);
+        /**
+         * Creates a Union8 wrapping a value of the first type
+         *
+         * @param value the value
+         * @return a Union8 object wrapping the value
+         */
+        Union8<First, Second, Third, Fourth, Fifth, Sixth, Seventh, Eighth> first(First value);
 
-        Union8<First, Second, Third, Fourth, Fifth, Sixth, Seventh, Eighth> second(Second second);
+        /**
+         * Creates a Union8 wrapping a value of the second type
+         *
+         * @param value the value
+         * @return a Union8 object wrapping the value
+         */
+        Union8<First, Second, Third, Fourth, Fifth, Sixth, Seventh, Eighth> second(Second value);
 
-        Union8<First, Second, Third, Fourth, Fifth, Sixth, Seventh, Eighth> third(Third third);
+        /**
+         * Creates a Union8 wrapping a value of the third type
+         *
+         * @param value the value
+         * @return a Union8 object wrapping the value
+         */
+        Union8<First, Second, Third, Fourth, Fifth, Sixth, Seventh, Eighth> third(Third value);
 
-        Union8<First, Second, Third, Fourth, Fifth, Sixth, Seventh, Eighth> fourth(Fourth fourth);
+        /**
+         * Creates a Union8 wrapping a value of the fourth type
+         *
+         * @param value the value
+         * @return a Union8 object wrapping the value
+         */
+        Union8<First, Second, Third, Fourth, Fifth, Sixth, Seventh, Eighth> fourth(Fourth value);
 
-        Union8<First, Second, Third, Fourth, Fifth, Sixth, Seventh, Eighth> fifth(Fifth fifth);
+        /**
+         * Creates a Union8 wrapping a value of the fifth type
+         *
+         * @param value the value
+         * @return a Union8 object wrapping the value
+         */
+        Union8<First, Second, Third, Fourth, Fifth, Sixth, Seventh, Eighth> fifth(Fifth value);
 
-        Union8<First, Second, Third, Fourth, Fifth, Sixth, Seventh, Eighth> sixth(Sixth sixth);
+        /**
+         * Creates a Union8 wrapping a value of the sixth type
+         *
+         * @param value the value
+         * @return a Union8 object wrapping the value
+         */
+        Union8<First, Second, Third, Fourth, Fifth, Sixth, Seventh, Eighth> sixth(Sixth value);
 
-        Union8<First, Second, Third, Fourth, Fifth, Sixth, Seventh, Eighth> seventh(
-                Seventh seventh);
+        /**
+         * Creates a Union8 wrapping a value of the seventh type
+         *
+         * @param value the value
+         * @return a Union8 object wrapping the value
+         */
+        Union8<First, Second, Third, Fourth, Fifth, Sixth, Seventh, Eighth> seventh(Seventh value);
 
-        Union8<First, Second, Third, Fourth, Fifth, Sixth, Seventh, Eighth> eighth(Eighth eighth);
+        /**
+         * Creates a Union8 wrapping a value of the eighth type
+         *
+         * @param value the value
+         * @return a Union8 object wrapping the value
+         */
+        Union8<First, Second, Third, Fourth, Fifth, Sixth, Seventh, Eighth> eighth(Eighth value);
     }
 }
