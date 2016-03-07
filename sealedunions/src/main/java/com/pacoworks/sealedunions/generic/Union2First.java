@@ -18,18 +18,23 @@ package com.pacoworks.sealedunions.generic;
 
 import java.util.function.Consumer;
 import java.util.function.Function;
-import java.util.function.Supplier;
 
-import com.pacoworks.sealedunions.Union1;
+import com.pacoworks.sealedunions.Union2;
 
-final class Absent<T> implements Union1<T> {
-    @Override
-    public void continued(Consumer<T> continuationFirst, Runnable continuationNone) {
-        continuationNone.run();
+final class Union2First<T, U> implements Union2<T, U> {
+    private final T value;
+
+    public Union2First(T value) {
+        this.value = value;
     }
 
     @Override
-    public <R> R join(Function<T, R> mapFirst, Supplier<R> mapNone) {
-        return mapNone.get();
+    public void continued(Consumer<T> continuationFirst, Consumer<U> continuationSecond) {
+        continuationFirst.accept(value);
+    }
+
+    @Override
+    public <R> R join(Function<T, R> mapFirst, Function<U, R> mapSecond) {
+        return mapFirst.apply(value);
     }
 }

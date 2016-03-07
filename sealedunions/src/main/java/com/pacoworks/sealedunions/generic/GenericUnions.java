@@ -23,12 +23,12 @@ public final class GenericUnions {
         return new Union1.Factory<Result>() {
             @Override
             public Union1<Result> first(Result result) {
-                return new Present<>(result);
+                return new Union1First<>(result);
             }
 
             @Override
             public Union1<Result> none() {
-                return new Absent<>();
+                return new Union1Absent<>();
             }
         };
     }
@@ -37,12 +37,12 @@ public final class GenericUnions {
         return new Union2.Factory<T, U>() {
             @Override
             public Union2<T, U> first(T t) {
-                return new Left<>(t);
+                return new Union2First<>(t);
             }
 
             @Override
             public Union2<T, U> second(U u) {
-                return new Right<>(u);
+                return new Union2Second<>(u);
             }
         };
     }
