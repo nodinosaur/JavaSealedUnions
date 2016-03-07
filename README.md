@@ -120,21 +120,6 @@ This set of classes are provided by the library to wrap any class regardless of 
 ```
 ```
 
-#### Result
-Result is a specialization of Union1<T> that takes a result, or an absence of one. A factory is available at `GenericUnions.resultFactory()`.
-```
-```
-
-#### Try
-Try is a specialization of Union2<T, Exception> that takes a value or an error. A factory is available at `GenericUnions.tryFactory()`.
-```
-```
-
-#### Either
-Either is a specialization of Union2<T, U> that takes a left and right value. A factory is available at `GenericUnions.eitherFactory()`.
-```
-```
-
 ### Typed wrappers
 In case you want your unions to be driven by your domain, you have to create your own classes implementing the base interfaces. There are two recommended approaches:
 

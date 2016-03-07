@@ -19,48 +19,6 @@ package com.pacoworks.sealedunions.generic;
 import com.pacoworks.sealedunions.*;
 
 public final class GenericUnions {
-    public static <Value> Result.Factory<Value> resultFactory() {
-        return new Result.Factory<Value>() {
-            @Override
-            public Result<Value> present(Value value) {
-                return new Present<>(value);
-            }
-
-            @Override
-            public Result<Value> absent() {
-                return new Absent<>();
-            }
-        };
-    }
-
-    public static <T> Try.Factory<T> tryFactory() {
-        return new Try.Factory<T>() {
-            @Override
-            public Try<T> success(T value) {
-                return new Success<>(value);
-            }
-
-            @Override
-            public Try<T> failure(Exception exception) {
-                return new Failure<>(exception);
-            }
-        };
-    }
-
-    public static <T, U> Either.Factory<T, U> eitherFactory() {
-        return new Either.Factory<T, U>() {
-            @Override
-            public Either<T, U> left(T t) {
-                return new Left<>(t);
-            }
-
-            @Override
-            public Either<T, U> right(U u) {
-                return new Right<>(u);
-            }
-        };
-    }
-
     public static <Result> Union1.Factory<Result> singletFactory() {
         return new Union1.Factory<Result>() {
             @Override

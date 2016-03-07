@@ -20,7 +20,9 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
-final class Absent<T> implements Result<T> {
+import com.pacoworks.sealedunions.Union1;
+
+final class Absent<T> implements Union1<T> {
     @Override
     public void continued(Consumer<T> continuationFirst, Runnable continuationNone) {
         continuationNone.run();

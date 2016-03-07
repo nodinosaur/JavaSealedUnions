@@ -19,7 +19,9 @@ package com.pacoworks.sealedunions.generic;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
-final class Left<T, U> implements Either<T, U> {
+import com.pacoworks.sealedunions.Union2;
+
+final class Left<T, U> implements Union2<T, U> {
     private final T value;
 
     public Left(T left) {

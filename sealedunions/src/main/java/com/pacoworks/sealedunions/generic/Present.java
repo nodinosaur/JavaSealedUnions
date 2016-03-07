@@ -20,7 +20,9 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
-final class Present<T> implements Result<T> {
+import com.pacoworks.sealedunions.Union1;
+
+final class Present<T> implements Union1<T> {
     private final T value;
 
     public Present(T value) {
