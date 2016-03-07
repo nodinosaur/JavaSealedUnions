@@ -5,7 +5,7 @@
 This library was heavily inspired by [RxEither](https://github.com/eleventigers/rxeither) and the wonderful [Domain Driven Design](https://fsharpforfunandprofit.com/ddd/) (DDD) talk by [Scott Wlaschin](https://github.com/swlaschin). Another similar talk with a full kata is [Types + Properties = Software](https://channel9.msdn.com/Events/FSharp-Events/fsharpConf-2016/Types-Properties-Software) by [Mark Seemann](https://github.com/ploeh).
 
 ## RATIONALE
-JavaSealedUnions brings unions into idiomatic Java to allow for better domain modelling. It can also help representing sealed classes, but that is not the main focus.
+JavaSealedUnions brings unions into idiomatic Java to allow for better domain modelling. It can also help representing sealed classes, but that is not the main focus. Chaining operations and monadic composition using JavaSealedUnions is also outside the scope of the library, but any union can be lifted to other frameworks like [RxJava](http://reactivex.io/) and [Javaslang](http://www.javaslang.io/). A backport library for RxJava and Java 7 is available at [pakoito/RxSealedUnions](https://github.com/pakoito/RxSealedUnions).
 
 Java's type system is considered not very powerful although it contains most OOP niceties. Some of the most known absences are sealed classes and [tagged unions](https://en.wikipedia.org/wiki/Tagged_union). Sealed classes are available in languages like [Kotlin](https://kotlinlang.org/docs/reference/classes.html#sealed-classes), or [C#](https://msdn.microsoft.com/en-gb/library/88c54tsw.aspx). Tagged unions are common on [Swift](https://developer.apple.com/library/ios/documentation/Swift/Conceptual/Swift_Programming_Language/Enumerations.html) and [Rust](https://doc.rust-lang.org/book/enums.html).
 
