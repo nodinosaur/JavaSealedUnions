@@ -290,106 +290,39 @@ The last approach is the recommended to make the most out of the principles desc
 A complete version of this kata can be found in [TennisGame.java](sealedunions/src/test/java/com/pacoworks/sealedunions/TennisGame.java) along with usage tests at [TennisGameTest.java](sealedunions/src/test/java/com/pacoworks/sealedunions/TennisGameTest.java)
 ```
 public interface Score {
-        static Score points(Points points) {
-            return () -> GenericUnions.<Points, Advantage, Deuce, Game>quartetFactory()
-                    .first(points);
-        }
 
-        static Score advantage(Advantage advantage) {
-            return () -> GenericUnions.<Points, Advantage, Deuce, Game>quartetFactory()
-                    .second(advantage);
-        }
+    Union4<Points, Advantage, Deuce, Game> getScore();
+}
 
-        static Score deuce() {
-            return () -> GenericUnions.<Points, Advantage, Deuce, Game>quartetFactory()
-                    .third(new Deuce());
-        }
+public interface PlayerPoints {
 
-        static Score game(Game game) {
-            return () -> GenericUnions.<Points, Advantage, Deuce, Game>quartetFactory()
-                    .fourth(game);
-        }
+    Union4<Zero, Fifteen, Thirty, Forty> getPlayerPoints();
+}
 
-        Union4<Points, Advantage, Deuce, Game> getScore();
-    }
+public interface Advantage extends Player { }
 
-    public interface PlayerPoints {
-        static PlayerPoints zero() {
-            return () -> GenericUnions.<Zero, Fifteen, Thirty, Forty>quartetFactory()
-                    .first(new Zero());
-        }
+public interface Game extends Player { }
 
-        static PlayerPoints fifteen() {
-            return () -> GenericUnions.<Zero, Fifteen, Thirty, Forty>quartetFactory()
-                    .second(new Fifteen());
-        }
+public interface Player {
 
-        static PlayerPoints thirty() {
-            return () -> GenericUnions.<Zero, Fifteen, Thirty, Forty>quartetFactory()
-                    .third(new Thirty());
-        }
+    Union2<PlayerOne, PlayerTwo> getPlayer();
+}
 
-        static PlayerPoints forty() {
-            return () -> GenericUnions.<Zero, Fifteen, Thirty, Forty>quartetFactory()
-                    .fourth(new Forty());
-        }
+public static class Points extends Pair<PlayerPoints, PlayerPoints> { }
 
-        Union4<Zero, Fifteen, Thirty, Forty> getPlayerPoints();
-    }
+public static class Zero { }
 
-    public interface Advantage extends Player {
-        static Advantage one() {
-            return () -> GenericUnions.<PlayerOne, PlayerTwo>doubletFactory()
-                    .first(new PlayerOne());
-        }
+public static class Fifteen { }
 
-        static Advantage two() {
-            return () -> GenericUnions.<PlayerOne, PlayerTwo>doubletFactory()
-                    .second(new PlayerTwo());
-        }
-    }
+public static class Thirty { }
 
-    public interface Game extends Player {
-        static Game one() {
-            return () -> GenericUnions.<PlayerOne, PlayerTwo>doubletFactory()
-                    .first(new PlayerOne());
-        }
+public static class Forty { }
 
-        static Game two() {
-            return () -> GenericUnions.<PlayerOne, PlayerTwo>doubletFactory()
-                    .second(new PlayerTwo());
-        }
-    }
+public static class Deuce { }
 
-    public interface Player {
-        static Player one() {
-            return () -> GenericUnions.<PlayerOne, PlayerTwo> doubletFactory()
-                    .first(new PlayerOne());
-        }
+public static class PlayerOne { }
 
-        static Player two() {
-            return () -> GenericUnions.<PlayerOne, PlayerTwo> doubletFactory()
-                    .second(new PlayerTwo());
-        }
-
-        Union2<PlayerOne, PlayerTwo> getPlayer();
-    }
-
-    public static class Points extends Pair<PlayerPoints, PlayerPoints> { }
-
-    public static class Zero { }
-
-    public static class Fifteen { }
-
-    public static class Thirty { }
-
-    public static class Forty { }
-
-    public static class Deuce { }
-
-    public static class PlayerOne { }
-
-    public static class PlayerTwo { }
+public static class PlayerTwo { }
 ```
 
 # License
