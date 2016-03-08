@@ -285,9 +285,9 @@ if (payment.valid()) {
 ```
 
 #### DDD
-The last approach is the recommended to make the most use of the principles described across this document, using types rather than inheritance or fields.
+The last approach is the recommended to make the most out of the principles described across this document, using types rather than inheritance or fields.
 
-A testable version of this kata can be found in [TennisGame.java](sealedunions/src/test/java/com/pacoworks/sealedunions/TennisGame.java)
+A complete version of this kata can be found in [TennisGame.java](sealedunions/src/test/java/com/pacoworks/sealedunions/TennisGame.java) along with usage tests at [TennisGameTest.java](sealedunions/src/test/java/com/pacoworks/sealedunions/TennisGameTest.java)
 ```
 public interface Score {
         static Score points(Points points) {
