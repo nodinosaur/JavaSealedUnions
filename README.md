@@ -309,20 +309,6 @@ public interface Player {
 
     Union2<PlayerOne, PlayerTwo> getPlayer();
 }
-
-public static class Zero { }
-
-public static class Fifteen { }
-
-public static class Thirty { }
-
-public static class Forty { }
-
-public static class Deuce { }
-
-public static class PlayerOne { }
-
-public static class PlayerTwo { }
 ```
 
 # License
