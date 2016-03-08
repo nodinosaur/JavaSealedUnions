@@ -2,7 +2,7 @@
 
 ## ACKNOWLEDGEMENTS
 
-This library was heavily inspired by [RxEither](https://github.com/eleventigers/rxeither) and the wonderful [Domain Driven Design](https://fsharpforfunandprofit.com/ddd/) (DDD) talk by [Scott Wlaschin](https://github.com/swlaschin). Another similar talk with a full kata is [Types + Properties = Software](https://channel9.msdn.com/Events/FSharp-Events/fsharpConf-2016/Types-Properties-Software) by [Mark Seemann](https://github.com/ploeh).
+This library was heavily inspired by [RxEither](https://github.com/eleventigers/rxeither) and the wonderful [Domain Driven Design](https://fsharpforfunandprofit.com/ddd/) (DDD) talk by [Scott Wlaschin](https://github.com/swlaschin). Another similar talk with a full kata we'll use as an example below is [Types + Properties = Software](https://channel9.msdn.com/Events/FSharp-Events/fsharpConf-2016/Types-Properties-Software) by [Mark Seemann](https://github.com/ploeh).
 
 ## RATIONALE
 JavaSealedUnions brings unions into idiomatic Java 8 to allow for better domain modelling. It can also help representing sealed classes, but that is not the main focus. Chaining operations and monadic composition using JavaSealedUnions is also outside the scope of the library, but any union can be lifted to other frameworks like [RxJava](http://reactivex.io/) and [Javaslang](http://www.javaslang.io/). A backport library for RxJava and Java 6 is available at [pakoito/RxSealedUnions](https://github.com/pakoito/RxSealedUnions).
@@ -287,7 +287,7 @@ if (payment.valid()) {
 #### DDD
 The last approach is the recommended to make the most use of the principles described across this document, using types rather than inheritance or fields.
 
-A testable version of this example can be found in [TennisGame.java](sealedunions/src/test/java/com/pacoworks/sealedunions/TennisGame.java)
+A testable version of this kata can be found in [TennisGame.java](sealedunions/src/test/java/com/pacoworks/sealedunions/TennisGame.java)
 ```
 public interface Score {
         static Score points(Points points) {
@@ -390,9 +390,6 @@ public interface Score {
     public static class PlayerOne { }
 
     public static class PlayerTwo { }
-
-// Example
-
 ```
 
 # License
