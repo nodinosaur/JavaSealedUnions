@@ -141,7 +141,7 @@ public LoggedInAccount login(String id){
 ```
 
 ### Typed wrappers
-In case you want your unions to be driven by your domain, you have to create your own classes implementing the base interfaces. There are two recommended approaches:
+In case you want your unions to be driven by your domain you have to create your own classes implementing the base interfaces. There are several recommended approaches:
 
 #### Holder class with generic union
 A domain class giving a more explicit naming and access to its methods and content.
@@ -282,6 +282,117 @@ PaymentType payment = getUserPayment();
 if (payment.valid()) {
     payment.continued(paymentService::byCard(), paymentService::withPayPal(), paymentService::viaBankTransfer())
 }
+```
+
+#### DDD
+The last approach is the recommended to make the most use of the principles described across this document, using types rather than inheritance or fields.
+
+A testable version of this example can be found in [TennisGame.java](sealedunions/src/test/java/com/pacoworks/sealedunions/TennisGame.java)
+```
+public interface Score {
+        static Score points(Points points) {
+            return () -> GenericUnions.<Points, Advantage, Deuce, Game>quartetFactory()
+                    .first(points);
+        }
+
+        static Score advantage(Advantage advantage) {
+            return () -> GenericUnions.<Points, Advantage, Deuce, Game>quartetFactory()
+                    .second(advantage);
+        }
+
+        static Score deuce() {
+            return () -> GenericUnions.<Points, Advantage, Deuce, Game>quartetFactory()
+                    .third(new Deuce());
+        }
+
+        static Score game(Game game) {
+            return () -> GenericUnions.<Points, Advantage, Deuce, Game>quartetFactory()
+                    .fourth(game);
+        }
+
+        Union4<Points, Advantage, Deuce, Game> getScore();
+    }
+
+    public interface PlayerPoints {
+        static PlayerPoints zero() {
+            return () -> GenericUnions.<Zero, Fifteen, Thirty, Forty>quartetFactory()
+                    .first(new Zero());
+        }
+
+        static PlayerPoints fifteen() {
+            return () -> GenericUnions.<Zero, Fifteen, Thirty, Forty>quartetFactory()
+                    .second(new Fifteen());
+        }
+
+        static PlayerPoints thirty() {
+            return () -> GenericUnions.<Zero, Fifteen, Thirty, Forty>quartetFactory()
+                    .third(new Thirty());
+        }
+
+        static PlayerPoints forty() {
+            return () -> GenericUnions.<Zero, Fifteen, Thirty, Forty>quartetFactory()
+                    .fourth(new Forty());
+        }
+
+        Union4<Zero, Fifteen, Thirty, Forty> getPlayerPoints();
+    }
+
+    public interface Advantage extends Player {
+        static Advantage one() {
+            return () -> GenericUnions.<PlayerOne, PlayerTwo>doubletFactory()
+                    .first(new PlayerOne());
+        }
+
+        static Advantage two() {
+            return () -> GenericUnions.<PlayerOne, PlayerTwo>doubletFactory()
+                    .second(new PlayerTwo());
+        }
+    }
+
+    public interface Game extends Player {
+        static Game one() {
+            return () -> GenericUnions.<PlayerOne, PlayerTwo>doubletFactory()
+                    .first(new PlayerOne());
+        }
+
+        static Game two() {
+            return () -> GenericUnions.<PlayerOne, PlayerTwo>doubletFactory()
+                    .second(new PlayerTwo());
+        }
+    }
+
+    public interface Player {
+        static Player one() {
+            return () -> GenericUnions.<PlayerOne, PlayerTwo> doubletFactory()
+                    .first(new PlayerOne());
+        }
+
+        static Player two() {
+            return () -> GenericUnions.<PlayerOne, PlayerTwo> doubletFactory()
+                    .second(new PlayerTwo());
+        }
+
+        Union2<PlayerOne, PlayerTwo> getPlayer();
+    }
+
+    public static class Points extends Pair<PlayerPoints, PlayerPoints> { }
+
+    public static class Zero { }
+
+    public static class Fifteen { }
+
+    public static class Thirty { }
+
+    public static class Forty { }
+
+    public static class Deuce { }
+
+    public static class PlayerOne { }
+
+    public static class PlayerTwo { }
+
+// Example
+
 ```
 
 # License
