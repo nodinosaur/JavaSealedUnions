@@ -25,37 +25,31 @@ public class TennisGameTest {
     @Test
     public void testTennis() throws Exception {
         Score start = Score.points(PlayerPoints.zero(), PlayerPoints.zero());
-        Score fifteenZero = scorePoint(start, Player.one());
-        printScore(fifteenZero);
-        Score thirtyZero = scorePoint(fifteenZero, Player.one());
-        printScore(thirtyZero);
-        Score fortyZero = scorePoint(thirtyZero, Player.one());
-        printScore(fortyZero);
+        Score fifteenZero = updateAndPrintScore(start, Player.one());
+        Score thirtyZero = updateAndPrintScore(fifteenZero, Player.one());
+        Score fortyZero = updateAndPrintScore(thirtyZero, Player.one());
         Assert.assertEquals(Score.points(PlayerPoints.forty(), PlayerPoints.zero()).getScore(),
                 fortyZero.getScore());
-        Score fortyThirty = scorePoint(scorePoint(fortyZero, Player.two()), Player.two());
-        printScore(fortyThirty);
+        Score fortyThirty = updateAndPrintScore(scorePoint(fortyZero, Player.two()), Player.two());
         Assert.assertEquals(Score.points(PlayerPoints.forty(), PlayerPoints.thirty()).getScore(),
                 fortyThirty.getScore());
-        Score deuce1 = scorePoint(fortyThirty, Player.two());
-        printScore(deuce1);
+        Score deuce1 = updateAndPrintScore(fortyThirty, Player.two());
         Assert.assertEquals(Score.deuce().getScore(), deuce1.getScore());
-        Score advantageP1 = scorePoint(deuce1, Player.one());
-        printScore(advantageP1);
+        Score advantageP1 = updateAndPrintScore(deuce1, Player.one());
         Assert.assertEquals(Score.advantage(Advantage.one()).getScore(), advantageP1.getScore());
-        Score gameP1 = scorePoint(advantageP1, Player.one());
-        printScore(gameP1);
+        Score gameP1 = updateAndPrintScore(advantageP1, Player.one());
         Assert.assertEquals(Score.game(Game.one()).getScore(), gameP1.getScore());
-        Score zeroFifteen = scorePoint(gameP1, Player.two());
-        printScore(zeroFifteen);
+        Score zeroFifteen = updateAndPrintScore(gameP1, Player.two());
         Assert.assertEquals(Score.points(PlayerPoints.zero(), PlayerPoints.fifteen()).getScore(),
                 zeroFifteen.getScore());
-        Score deuce2 = scorePoint(advantageP1, Player.two());
-        printScore(deuce2);
+        Score deuce2 = updateAndPrintScore(advantageP1, Player.two());
         Assert.assertEquals(Score.deuce().getScore(), deuce2.getScore());
     }
 
-    private void printScore(Score fortyZero) {
-        System.out.println(Score.getString(fortyZero));
+    private Score updateAndPrintScore(Score oldScore, Player player) {
+        Score newScore = scorePoint(oldScore, player);
+        System.out.println(Score.getString(oldScore) + " + " + Player.getString(player) + " -> "
+                + Score.getString(newScore));
+        return newScore;
     }
 }

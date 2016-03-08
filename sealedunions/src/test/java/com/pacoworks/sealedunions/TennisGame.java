@@ -191,6 +191,10 @@ one -> isPlayerThirty(points.getKey()) ? Score.deuce()
                     .second(new PlayerTwo());
         }
 
+        static String getString(Player player) {
+            return player.getPlayer().join(playerOne -> "Player 1", playerTwo -> "Player 2");
+        }
+
         Union2<PlayerOne, PlayerTwo> getPlayer();
     }
 
