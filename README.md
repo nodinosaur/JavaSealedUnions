@@ -1,8 +1,37 @@
 # JavaSealedUnions
 
 ## ACKNOWLEDGEMENTS
-
 This library was heavily inspired by [RxEither](https://github.com/eleventigers/rxeither) and the wonderful [Domain Driven Design](https://fsharpforfunandprofit.com/ddd/) (DDD) talk by [Scott Wlaschin](https://github.com/swlaschin). Another similar talk with a full kata we'll use as an example below is [Types + Properties = Software](https://channel9.msdn.com/Events/FSharp-Events/fsharpConf-2016/Types-Properties-Software) by [Mark Seemann](https://github.com/ploeh).
+
+## DISTRIBUTION
+Add as a dependency to your `build.gradle`
+
+    repositories {
+        ...
+        maven { url "https://jitpack.io" }
+        ...
+    }
+
+    dependencies {
+        ...
+        compile 'com.github.pakoito:JavaSealedUnions:1.0.0'
+        ...
+    }
+
+or to your `pom.xml`
+
+    <repositories>
+        <repository>
+            <id>jitpack.io</id>
+            <url>https://jitpack.io</url>
+        </repository>
+    </repositories>
+
+    <dependency>
+        <groupId>com.github.pakoito</groupId>
+        <artifactId>JavaSealedUnions</artifactId>
+        <version>1.0.0</version>
+    </dependency>
 
 ## RATIONALE
 JavaSealedUnions brings unions into idiomatic Java 8 to allow for better domain modelling. It can also help representing sealed classes, but that is not the main focus. Chaining operations and monadic composition using JavaSealedUnions is also outside the scope of the library, but any union can be lifted to other frameworks like [RxJava](http://reactivex.io/) and [Javaslang](http://www.javaslang.io/). A backport library for RxJava and Java 6 is available at [pakoito/RxSealedUnions](https://github.com/pakoito/RxSealedUnions).
