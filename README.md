@@ -323,7 +323,7 @@ public interface Score {
     Union4<Points, Advantage, Deuce, Game> getScore();
 }
 
-public static class Points extends Pair<PlayerPoints, PlayerPoints> { }
+public final class Points extends Pair<PlayerPoints, PlayerPoints> { }
 
 public interface PlayerPoints {
 
@@ -331,6 +331,8 @@ public interface PlayerPoints {
 }
 
 public interface Advantage extends Player { }
+
+public final class Deuce { }
 
 public interface Game extends Player { }
 
