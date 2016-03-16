@@ -67,7 +67,7 @@ It needs to be able to dereference the types to obtain a single, unequivocal, re
 
 - Nested ifs:
 
-```
+```java
 if (union.isOne()) {
     One element = union.getOne();
     /* do something with one*/ 
@@ -81,7 +81,7 @@ if (union.isOne()) {
 
 - Polymorphism:
 
-```
+```java
 MyElement element = createElement();
 if (element instanceof One) {
     One one = (One)element;
@@ -105,8 +105,8 @@ For the library I have chosen continuations and joining as the default methods i
 
 ### Final implementation of Union2
 
-```
-public interface Union2<Left, Right> {
+```java
+public interface Union2<First, Second> {
 
     void continued(Consumer<First> continuationFirst, Consumer<Second> continuationSecond);
 
@@ -116,7 +116,7 @@ public interface Union2<Left, Right> {
 
 And one example usage:
 
-```
+```java
 Union2<User, Team> information = serverRequester.loggedAccountInformation();
 
 // Get a single piece of information from either
@@ -129,7 +129,7 @@ information.continued(UserPageTemplater::start(), TeamPageTemplater::start());
 ### Creation
 Part of creating a union is that the union itself is a new type and has to be represented too. For this case it's been included one Factory interface per UnionN that can be extended and required to create each one of the elements in the union:
 
-```
+```java
 public interface Factory<Left, Right> {
 
     Union2<Left, Right> first(Left first);
@@ -143,7 +143,7 @@ public interface Factory<Left, Right> {
 
 ### Generic unions
 This set of classes are provided by the library to wrap any class regardless of its type. They come in flavours from `Union1` to `Union9`. `GenericUnions` is a class with factories for all the union types. Factories can be provided by calling one of `singletFactory()`, `doubletFactory()`, `tripletFactory()`, `quartetFactory()`, `quintetFactory()`, `sextetFactory()`, `septetFactory()`, `octetFactory()` and `nonetFactory()`.
-```
+```java
 public class LoggedInAccount {
     public final String id;
 
@@ -177,7 +177,7 @@ A domain class giving a more explicit naming and access to its methods and conte
 
 **REMINDER: Implement `getXXX()` as a way of returning a type inside the union defeats the purpose of unions.**
 
-```
+```java
 public class Salute {
 
     private static final Either.Factory<Dog, Neighbour> FACTORY = GenericUnions.eitherFactory();
@@ -217,7 +217,7 @@ This ties up to the inheritance approach, except it's sealed and explicit. It ca
 **As a personal rule I would avoid any inherited methods, overloading, or overriding in any of the child classes. Watch the DDD talk in the Acknowledgements section to better understand the use of union types as plain data.**
 
 **The example below breaks this rule by adding a new method `valid()`.**
-```
+```java
 public abstract class PaymentType implements Union3<CardPayment, PayPalPayment, BankTransferPayment> {
 
     public abstract boolean valid();
@@ -317,7 +317,7 @@ if (payment.valid()) {
 The last approach is the recommended to make the most out of the principles described across this document, using types rather than inheritance or fields.
 
 A complete version of the [Tennis kata](http://www.codingdojo.org/cgi-bin/index.pl?KataTennis) can be found in [TennisGame.java](sealedunions/src/test/java/com/pacoworks/sealedunions/TennisGame.java) along with usage tests at [TennisGameTest.java](sealedunions/src/test/java/com/pacoworks/sealedunions/TennisGameTest.java)
-```
+```java
 public interface Score {
 
     Union4<Points, Advantage, Deuce, Game> getScore();
