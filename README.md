@@ -6,6 +6,7 @@ This library was heavily inspired by [RxEither](https://github.com/eleventigers/
 ## DISTRIBUTION
 Add as a dependency to your `build.gradle`
 
+```groovy
     repositories {
         ...
         maven { url "https://jitpack.io" }
@@ -17,9 +18,11 @@ Add as a dependency to your `build.gradle`
         compile 'com.github.pakoito:JavaSealedUnions:1.0.0'
         ...
     }
+```
 
 or to your `pom.xml`
 
+```xml
     <repositories>
         <repository>
             <id>jitpack.io</id>
@@ -32,6 +35,7 @@ or to your `pom.xml`
         <artifactId>JavaSealedUnions</artifactId>
         <version>1.0.0</version>
     </dependency>
+```
 
 ## RATIONALE
 JavaSealedUnions brings unions into idiomatic Java 8 to allow for better domain modelling. It can also help representing sealed classes, but that is not the main focus. Chaining operations and monadic composition using JavaSealedUnions is also outside the scope of the library, but any union can be lifted to other frameworks like [RxJava](http://reactivex.io/) and [Javaslang](http://www.javaslang.io/). A backport library for RxJava and Java 6 is available at [pakoito/RxSealedUnions](https://github.com/pakoito/RxSealedUnions).
