@@ -19,6 +19,15 @@ package com.pacoworks.sealedunions.generic;
 import com.pacoworks.sealedunions.*;
 
 public final class GenericUnions {
+    public static <Result> Union0.Factory<Result> nulletFactory() {
+        return new Union0.Factory<Result>() {
+            @Override
+            public Union0<Result> first(Result result) {
+                return new Union0First<>(result);
+            }
+        };
+    }
+
     public static <Result> Union1.Factory<Result> singletFactory() {
         return new Union1.Factory<Result>() {
             @Override
