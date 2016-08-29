@@ -16,10 +16,10 @@
 
 package com.pacoworks.sealedunions.generic;
 
+import com.pacoworks.sealedunions.Union8;
+
 import java.util.function.Consumer;
 import java.util.function.Function;
-
-import com.pacoworks.sealedunions.Union8;
 
 final class Union8Fifth<A, B, C, D, E, F, G, H> implements Union8<A, B, C, D, E, F, G, H> {
     private final E value;
@@ -60,5 +60,10 @@ final class Union8Fifth<A, B, C, D, E, F, G, H> implements Union8<A, B, C, D, E,
         final Object $value = this.value;
         result = result * PRIME + ($value == null ? 0 : $value.hashCode());
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return value.toString();
     }
 }

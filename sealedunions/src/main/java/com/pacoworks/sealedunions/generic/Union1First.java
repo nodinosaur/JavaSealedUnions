@@ -16,11 +16,11 @@
 
 package com.pacoworks.sealedunions.generic;
 
+import com.pacoworks.sealedunions.Union1;
+
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
-
-import com.pacoworks.sealedunions.Union1;
 
 final class Union1First<T> implements Union1<T> {
     private final T value;
@@ -56,5 +56,10 @@ final class Union1First<T> implements Union1<T> {
         final Object $value = this.value;
         result = result * PRIME + ($value == null ? 0 : $value.hashCode());
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return value.toString();
     }
 }

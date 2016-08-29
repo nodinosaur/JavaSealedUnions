@@ -16,10 +16,10 @@
 
 package com.pacoworks.sealedunions.generic;
 
+import com.pacoworks.sealedunions.Union4;
+
 import java.util.function.Consumer;
 import java.util.function.Function;
-
-import com.pacoworks.sealedunions.Union4;
 
 final class Union4Fourth<A, B, C, D> implements Union4<A, B, C, D> {
     private final D value;
@@ -57,5 +57,10 @@ final class Union4Fourth<A, B, C, D> implements Union4<A, B, C, D> {
         final Object $value = this.value;
         result = result * PRIME + ($value == null ? 0 : $value.hashCode());
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return value.toString();
     }
 }

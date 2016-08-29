@@ -16,11 +16,11 @@
 
 package com.pacoworks.sealedunions.generic;
 
+import com.pacoworks.sealedunions.Union1;
+
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
-
-import com.pacoworks.sealedunions.Union1;
 
 final class Union1None<T> implements Union1<T> {
     @Override
@@ -45,5 +45,10 @@ final class Union1None<T> implements Union1<T> {
     public int hashCode() {
         int result = 1;
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return "None()";
     }
 }
